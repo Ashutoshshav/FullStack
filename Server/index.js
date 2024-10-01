@@ -20,9 +20,9 @@ const port = process.env.PORT || 3000;
 
 // Middleware configurations
 app.use(cors({
-    origin: ["http://localhost:5173"],
-    methods: ["*"],
-    credentials: true
+    origin: ["http://192.168.0.252:3000", "http://localhost:5173"], // Allowed origins
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"], // Allowed methods
+    credentials: true // Allow credentials if needed
 }));
 
 app.use(bodyParser.json());
@@ -46,7 +46,7 @@ app.get('*', (req, res) => {
 scheduleInvoice();
 
 // Start the server
-app.listen(port, () => {
+app.listen(port, '0.0.0.0', () => {
     console.log("Server is running on " + port);
 });
 
