@@ -4,13 +4,15 @@ import axios from 'axios';
 function OrderSchedule({ onChangeSchedule }) {
     let token = localStorage.getItem("token");
     const [deliveryDate, setDeliveryDate] = useState("DD-MON-YYYY")
+    const [clickedScheduleId, setClickedScheduleId] = useState(null);
+
     let fetchDeliveryDate = async () => {
         try {
-            let response = await axios.get("http://localhost:3000/api/order/deliverySchedules", {
+            let response = await axios.get("http://192.168.0.252:3000/api/order/deliverySchedules", {
                 headers: {
-                  Authorization: `${token}`,
+                    Authorization: `${token}`,
                 },
-              })
+            })
             // console.log(response.data.deliveryTimes)
             setDeliveryDate(response.data)
         } catch (err) {
@@ -27,7 +29,7 @@ function OrderSchedule({ onChangeSchedule }) {
     }, [])
     return (
         <div className='mt-3'>
-            <h2 className="sm:w-96 w-full text-center font-medium text-white text-xl inline-block py-1" style={{ backgroundColor: "#045ab1" }}>
+            <h2 className="sm:w-96 sm:rounded-r-lg w-full text-center font-medium text-white text-xl inline-block py-2" style={{ backgroundColor: "#045ab1" }}>
                 Schedule Your Order
             </h2>
             <br />
@@ -41,7 +43,8 @@ function OrderSchedule({ onChangeSchedule }) {
             <div className="text-base flex flex-wrap">
                 {deliveryDate.deliveryTimes &&
                     deliveryDate.deliveryTimes.map((item, count = 0) => (
-                        <div className="inline-block flex-col border-2 rounded-lg my-3 mx-2 px-3 cursor-pointer" key={item.id} onClick={() => setSchedule(item.id)}>
+                        <div className={`inline-block flex-col border-2 rounded-lg my-3 mx-2 px-3 cursor-pointer 
+                            ${clickedScheduleId === item.id ? 'border-blue-500 bg-blue-50' : 'border-gray-300'}`} key={item.id} onClick={() => { setClickedScheduleId(item.id); setSchedule(item.id) }}>
                             <p className="font-semibold text-xl">Delivery Schedule</p>
                             <p className="font-semibold text-blue-500 text-lg pl-10">
                                 Between {item.startTime} - {item.endTime}

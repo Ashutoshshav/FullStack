@@ -18,9 +18,11 @@
     "express": "^4.21.0",
     "iisnode-env": "^1.0.3",
     "jsonwebtoken": "^9.0.2",
+    "moment-timezone": "^0.5.46",
     "mssql": "^11.0.1",
     "node-cron": "^3.0.3",
     "path": "^0.12.7",
+    "pdfkit": "^0.15.0",
     "pm2": "^5.4.2"
   },
   "devDependencies": {

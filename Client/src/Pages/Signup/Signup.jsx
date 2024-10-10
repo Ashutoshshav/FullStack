@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link, useNavigate } from "react-router-dom";
 import axios from 'axios';
 import { z } from 'zod';
 
@@ -30,6 +31,7 @@ const schema = z.object({
 });
 
 function Signup() {
+    const navigate = useNavigate();
     const [data, setData] = useState({
         name: "",
         mobileno: "",
@@ -65,9 +67,13 @@ function Signup() {
                 console.log("Form submitted successfully", validation.data);
 
                 // Axios call to backend
-                const response = await axios.post("http://localhost:3000/api/user/signup", data);
-                console.log(response.data);
-                setErrorMsg({ success: response.data.message || "Signup successful!" });
+                const response = await axios.post("http://192.168.0.252:3000/api/user/signup", data);
+                setErrorMsg({ error: response.data });
+                if (response.data == "Signup Successfully") {
+                    console.log(response.data);
+                    navigate("/Login")
+                    setErrorMsg({ success: response.data.message || "Signup successful!" });
+                }
             }
         } catch (err) {
             console.log(err);
@@ -80,7 +86,7 @@ function Signup() {
                 <h1 className='text-2xl font-bold text-center text-gray-800 mb-6'>Sign Up</h1>
 
                 {/* Show general error or success message */}
-                {errorMsg.success ? (<p className="text-center text-green-500 font-medium mb-4">{errorMsg.success}</p>) : ""}
+                {errorMsg.error ? (<p className="text-center text-red-500 font-medium mb-4">{errorMsg.error}</p>) : ""}
 
                 {/* Show individual field error messages */}
                 <form>

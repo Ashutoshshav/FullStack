@@ -40,7 +40,7 @@ async function handleUserSignup(req, res) {
                 .query(`INSERT INTO CustMaster (Cust_ID, Name_of_Cust, MobNo, Email, Address, GSTNo, Password) VALUES (@Cust_ID, @Name_of_Cust, @MobNo, @Email, @Address, @GSTNo, @Password)`)
     
             // console.log(result)
-            return res.status(200).send("Signup Successfully go for Login")
+            return res.status(200).send("Signup Successfully")
         } else {
             return res.send("User already exist please Login")
         }

@@ -1,4 +1,5 @@
 import React, { useState, useContext } from 'react';
+import { Link, useNavigate } from "react-router-dom";
 import CustomerContext from '../../Contexts/CustomerContext/CustomerContext';
 import axios from 'axios';
 import { z } from 'zod';
@@ -14,6 +15,7 @@ const schema = z.object({
 });
 
 function Login() {
+    const navigate = useNavigate();
     const { setCustomer } = useContext(CustomerContext);
     const [errorMsg, setErrorMsg] = useState({});
     const [successMsg, setSuccessMsg] = useState("");
@@ -50,20 +52,24 @@ function Login() {
                 console.log("Form submitted successfully", validation.data);
 
                 // Axios call to backend
-                const response = await axios.post("http://localhost:3000/api/user/login", data);
+                const response = await axios.post("http://192.168.0.252:3000/api/user/login", data);
 
                 if (response.data.token == null) {
-                    setErrorMsg({ form: response.data || "Login failed!" }); // Show backend error
-                    setSuccessMsg("");
+                    if(response.data == "User not Exist") {
+                        navigate("/Signup")
+                    } else {
+                        setErrorMsg({ form: response.data || "Login failed!" }); // Show backend error
+                        setSuccessMsg("");
+                    }
                 } else {
                     localStorage.setItem("token", response.data.token);
                     setSuccessMsg("Login successful!");
                     setErrorMsg({}); // Clear error messages on success
-
+                    navigate("/")
                     // Optionally, set customer data here with setCustomer(response.data.customer);
-                    if (response.data.customer) {
-                        setCustomer(response.data.customer);
-                    }
+                    // if (response.data.customer) {
+                    //     setCustomer(response.data.customer);
+                    // }
                 }
             }
         } catch (err) {

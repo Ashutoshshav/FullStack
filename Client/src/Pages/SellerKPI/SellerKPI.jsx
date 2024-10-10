@@ -1,12 +1,38 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import { Link, useNavigate } from "react-router-dom";
 
 function SellerKPI(props) {
+    const navigate = useNavigate();
+
+    const [sellerKPI, setSellerKPI] = useState({
+        financialPerformance:{},
+        customerPerformance:{},
+        vendorPerformance:{},
+        monthStatics:{},
+        avgMonthStatics:{},
+    })
+
+    let fetchSellerKPI = async () => {
+        try {
+            let response = await axios.get("http://192.168.0.252:3000/api/seller/SellerKPI")
+
+            console.log(response.data.financialPerformance)
+            setSellerKPI(response.data)
+        } catch(err) {
+            console.log(err)
+        }
+    }
+
+    useEffect(() => {
+        fetchSellerKPI()
+    }, [])
     return (
         <div>
             <h1 className="text-3xl text-center font-medium my-3">Seller's KPI's</h1>
 
             <div>
-                <h2 className="sm:w-96 w-full text-center font-medium text-white text-xl inline-block py-1" style={{ backgroundColor: "#045ab1" }}>
+                <h2 className="sm:w-96 sm:rounded-r-lg w-full text-center font-medium text-white text-xl inline-block py-2" style={{ backgroundColor: "#045ab1" }}>
                     Financial Performance
                 </h2>
 
@@ -14,31 +40,31 @@ function SellerKPI(props) {
                     <div className="inline-block flex-col border-2 rounded-lg my-3 mx-2 px-3">
                         <p className="font-normal text-lg">Outstanding-Coustomers</p>
                         <p className="font-semibold text-blue-500 text-lg text-right">
-                            18,15,263
+                            {sellerKPI.financialPerformance.outstandingCustomers}
                         </p>
                     </div>
                     <div className="inline-block flex-col border-2 rounded-lg my-3 mx-2 px-3">
                         <p className="font-normal text-lg">Outstanding-Vendors</p>
                         <p className="font-semibold text-blue-500 text-lg text-right">
-                            18,15,263
+                        {sellerKPI.financialPerformance.outstandingVendors}
                         </p>
                     </div>
                     <div className="inline-block flex-col border-2 rounded-lg my-3 mx-2 px-3">
                         <p className="font-normal text-lg">Outstanding-Transport</p>
                         <p className="font-semibold text-blue-500 text-lg text-right">
-                            18,15,263
+                            {sellerKPI.financialPerformance.outstandingTransport}
                         </p>
                     </div>
                     <div className="inline-block flex-col border-2 rounded-lg my-3 mx-2 px-3">
                         <p className="font-normal text-lg">Surplus-Revenue</p>
                         <p className="font-semibold text-blue-500 text-lg text-right">
-                            18,15,263
+                            {((sellerKPI.financialPerformance.outstandingVendors + sellerKPI.financialPerformance.outstandingTransport) - sellerKPI.financialPerformance.outstandingCustomers) || 0}
                         </p>
                     </div>
                 </div>
             </div>
             <div>
-                <h2 className="sm:w-96 w-full text-center font-medium text-white text-xl inline-block py-1" style={{ backgroundColor: "#045ab1" }}>
+                <h2 className="sm:w-96 sm:rounded-r-lg w-full text-center font-medium text-white text-xl inline-block py-2" style={{ backgroundColor: "#045ab1" }}>
                     Customer's Performance
                 </h2>
 
@@ -46,31 +72,31 @@ function SellerKPI(props) {
                     <div className="inline-block flex-col border-2 rounded-lg my-3 mx-2 px-3">
                         <p className="font-normal text-lg">Total Coustomers</p>
                         <p className="font-semibold text-blue-500 text-lg text-right">
-                            263
+                            {sellerKPI.customerPerformance.totalCust}
                         </p>
                     </div>
                     <div className="inline-block flex-col border-2 rounded-lg my-3 mx-2 px-3">
                         <p className="font-normal text-lg">Active Coustomers</p>
                         <p className="font-semibold text-blue-500 text-lg text-right">
-                            163
+                            {sellerKPI.customerPerformance.totalActiveCust}
                         </p>
                     </div>
                     <div className="inline-block flex-col border-2 rounded-lg my-3 mx-2 px-3">
                         <p className="font-normal text-lg">inactive Coustomers</p>
                         <p className="font-semibold text-blue-500 text-lg text-right">
-                            {263 - 163}
+                            {sellerKPI.customerPerformance.totalInactiveCust}
                         </p>
                     </div>
                     <div className="inline-block flex-col border-2 rounded-lg my-3 mx-2 px-3">
                         <p className="font-normal text-lg">Active Good Coustomers</p>
                         <p className="font-semibold text-blue-500 text-lg text-right">
-                            150
+                            {sellerKPI.customerPerformance.totalGoodActiveCust}
                         </p>
                     </div>
                 </div>
             </div>
             <div>
-                <h2 className="sm:w-96 w-full text-center font-medium text-white text-xl inline-block py-1" style={{ backgroundColor: "#045ab1" }}>
+                <h2 className="sm:w-96 sm:rounded-r-lg w-full text-center font-medium text-white text-xl inline-block py-2" style={{ backgroundColor: "#045ab1" }}>
                     Vendor's Performance
                 </h2>
 
@@ -78,32 +104,32 @@ function SellerKPI(props) {
                     <div className="inline-block flex-col border-2 rounded-lg my-3 mx-2 px-3">
                         <p className="font-normal text-lg">Outstanding-Coustomers</p>
                         <p className="font-semibold text-blue-500 text-lg text-right">
-                            375
+                            {sellerKPI.vendorPerformance.totalVendor}
                         </p>
                     </div>
                     <div className="inline-block flex-col border-2 rounded-lg my-3 mx-2 px-3">
                         <p className="font-normal text-lg">Outstanding-Vendors</p>
                         <p className="font-semibold text-blue-500 text-lg text-right">
-                            275
+                            {sellerKPI.vendorPerformance.totalActiveVendor}
                         </p>
                     </div>
                     <div className="inline-block flex-col border-2 rounded-lg my-3 mx-2 px-3">
                         <p className="font-normal text-lg">Outstanding-Transport</p>
                         <p className="font-semibold text-blue-500 text-lg text-right">
-                            {135 - 275}
+                            {sellerKPI.vendorPerformance.totalInactiveVendor}
                         </p>
                     </div>
                     <div className="inline-block flex-col border-2 rounded-lg my-3 mx-2 px-3">
                         <p className="font-normal text-lg">Surplus-Revenue</p>
                         <p className="font-semibold text-blue-500 text-lg text-right">
-                            176
+                            {sellerKPI.vendorPerformance.totalGoodActiveVendor}
                         </p>
                     </div>
                 </div>
             </div>
             <div>
-                <h2 className="sm:w-96 w-full text-center font-medium text-white text-xl inline-block py-1" style={{ backgroundColor: "#045ab1" }}>
-                    Sep 2024 Statics
+                <h2 className="sm:w-96 sm:rounded-r-lg w-full text-center font-medium text-white text-xl inline-block py-2" style={{ backgroundColor: "#045ab1" }}>
+                    Current Month Statics
                 </h2>
 
                 <div className="text-base">
@@ -111,25 +137,25 @@ function SellerKPI(props) {
                         <div className="inline-block flex-col border-2 rounded-lg my-3 mx-2 px-3">
                             <p className="font-normal text-lg">Total Sale</p>
                             <p className="font-semibold text-blue-500 text-lg text-right">
-                                18,15,263
+                                {sellerKPI.monthStatics.totalSale}
                             </p>
                         </div>
                         <div className="inline-block flex-col border-2 rounded-lg my-3 mx-2 px-3">
                             <p className="font-normal text-lg">Total Purchase</p>
                             <p className="font-semibold text-blue-500 text-lg text-right">
-                                18,15,263
+                                {sellerKPI.monthStatics.totalPurchase}
                             </p>
                         </div>
                         <div className="inline-block flex-col border-2 rounded-lg my-3 mx-2 px-3">
                             <p className="font-normal text-lg">Total Tranport Cost</p>
                             <p className="font-semibold text-blue-500 text-lg text-right">
-                                18,15,263
+                            {sellerKPI.monthStatics.totalTransportCost}
                             </p>
                         </div>
                         <div className="inline-block flex-col border-2 rounded-lg my-3 mx-2 px-3">
                             <p className="font-normal text-lg">Total Profit</p>
                             <p className="font-semibold text-blue-500 text-lg text-right">
-                                18,15,263
+                            { (sellerKPI.monthStatics.totalSale - (sellerKPI.monthStatics.totalPurchase + sellerKPI.monthStatics.totalTransportCost)) || 0}
                             </p>
                         </div>
                     </div>
@@ -137,25 +163,25 @@ function SellerKPI(props) {
                         <div className="inline-block flex-col border-2 rounded-lg my-3 mx-2 px-3">
                             <p className="font-normal text-lg">Avg. Daily Sale</p>
                             <p className="font-semibold text-blue-500 text-lg text-right">
-                                18,15,263
+                            {sellerKPI.avgMonthStatics.avgTotalSale}
                             </p>
                         </div>
                         <div className="inline-block flex-col border-2 rounded-lg my-3 mx-2 px-3">
                             <p className="font-normal text-lg">Avg. Daily Purchase</p>
                             <p className="font-semibold text-blue-500 text-lg text-right">
-                                18,15,263
+                            {sellerKPI.avgMonthStatics.avgTotalPurchase}
                             </p>
                         </div>
                         <div className="inline-block flex-col border-2 rounded-lg my-3 mx-2 px-3">
                             <p className="font-normal text-lg">Avg. Daily Trasport Cost</p>
                             <p className="font-semibold text-blue-500 text-lg text-right">
-                                18,15,263
+                            {sellerKPI.avgMonthStatics.avgTotalTransportCost}
                             </p>
                         </div>
                         <div className="inline-block flex-col border-2 rounded-lg my-3 mx-2 px-3">
                             <p className="font-normal text-lg">Avg. Daily Profit</p>
                             <p className="font-semibold text-blue-500 text-lg text-right">
-                                18,15,263
+                            { (sellerKPI.avgMonthStatics.avgTotalSale - (sellerKPI.avgMonthStatics.avgTotalPurchase + sellerKPI.avgMonthStatics.avgTotalTransportCost)) || 0}
                             </p>
                         </div>
                     </div>
