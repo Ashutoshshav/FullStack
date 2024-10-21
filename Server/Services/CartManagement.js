@@ -1,6 +1,6 @@
 const { connectDB, sql } = require("../Utils/Connection")
 
-async function insertProductInCart(Cust_ID, SKUID, SKUName, Qty, Order_sts) {
+async function insertProductInCart(Cust_ID, SKUID, SKUName, Qty, Order_sts, InvoiceGenerated) {
     try {
         const pool = await connectDB()
         console.log(Cust_ID, SKUID, Qty, Order_sts)
@@ -10,7 +10,8 @@ async function insertProductInCart(Cust_ID, SKUID, SKUName, Qty, Order_sts) {
             .input('SKUName', sql.VarChar, SKUName)
             .input('Qty', sql.Int, Qty)
             .input('Order_sts', sql.Int, Order_sts)
-            .query('INSERT INTO Order_Data (Cust_ID, SKUID, SKUName, Qty, Order_sts) VALUES (@Cust_ID, @SKUID, @SKUName, @Qty, @Order_sts)')
+            .input('InvoiceGenerated', sql.Int, InvoiceGenerated)
+            .query('INSERT INTO Order_Data (Cust_ID, SKUID, SKUName, Qty, Order_sts, InvoiceGenerated) VALUES (@Cust_ID, @SKUID, @SKUName, @Qty, @Order_sts, @InvoiceGenerated)')
 
         console.log(SKUID + " inserted in Cart")
         return result;

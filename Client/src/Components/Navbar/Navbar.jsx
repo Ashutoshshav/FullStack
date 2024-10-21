@@ -1,6 +1,11 @@
+<<<<<<< Updated upstream
 import React, { useState } from "react";
+=======
+import React, { useState, useEffect } from "react";
+>>>>>>> Stashed changes
 import Logo from "../../assets/Logo.png";
 import { Link, useNavigate } from "react-router-dom";
+import Swal from 'sweetalert2';
 
 function Navbar(props) {
     const navigate = useNavigate();
@@ -8,11 +13,50 @@ function Navbar(props) {
         navigate("/Customer");
     }
 
+<<<<<<< Updated upstream
+=======
+    const [showIcon, setShowIcon] = useState(true)
+    
+    useEffect(() => {
+        let token = localStorage.getItem("token");
+        if (token) {
+            setShowIcon(false)
+        }
+    })
+
+>>>>>>> Stashed changes
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
     const toggleMobileMenu = () => {
         setIsMobileMenuOpen(!isMobileMenuOpen);
     };
+<<<<<<< Updated upstream
+=======
+
+    let handleLogout = async () => {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You want to Logout",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, Logout!"
+          }).then(async (result) => {
+            if (result.isConfirmed) {
+              await Swal.fire({
+                title: "Logout!",
+                text: "You have Successfully Logged Out.",
+                icon: "success",
+                timer: 2000,
+              });
+              localStorage.removeItem("token");
+              navigate("/"); 
+              window.location.reload();
+            }
+          });
+    }
+>>>>>>> Stashed changes
     return (
         <nav className="bg-gray-200 shadow-md w-full border-b border-blue-200">
             <div className="max-w-full mx-auto sm:px-6 lg:px-8">
@@ -34,6 +78,7 @@ function Navbar(props) {
                     </div>
 
                     {/* Login and Cart Buttons */}
+<<<<<<< Updated upstream
                     <div className="hidden md:flex items-center gap-6">
                         <Link to="/Login">
                             <button className="bg-green-500 text-white font-bold px-5 py-3 rounded-lg hover:bg-green-600 active:bg-green-700">Login</button>
@@ -48,6 +93,30 @@ function Navbar(props) {
                                 Invoice
                             </button>
                         </Link>
+=======
+                    <div className="hidden md:flex items-center gap-3">
+                        {
+                            showIcon ? 
+                            <div className="flex gap-3">
+                                <Link to="/Login">
+                                    <button className="bg-green-500 text-white font-bold px-5 py-3 rounded-lg hover:bg-green-600 active:bg-green-700">Login</button>
+                                </Link>
+                                <Link to="/Signup">
+                                    <button className="bg-blue-500 text-white font-bold px-5 py-3 rounded-lg hover:bg-blue-600 active:bg-blue-700">
+                                        Signup
+                                    </button>
+                                </Link>
+                            </div> : 
+                            <div className="flex gap-3">
+                                <Link to="/Invoice">
+                                    <button className="bg-green-500 text-white font-bold px-5 py-3 rounded-lg hover:bg-green-600 active:bg-green-700">
+                                        Invoice
+                                    </button>
+                                </Link>
+                                <button className="text-white font-bold block px-5 py-3 rounded-lg text-base bg-red-500 hover:bg-red-700" onClick={handleLogout}>Logout</button>
+                            </div>
+                        }
+>>>>>>> Stashed changes
                     </div>
 
                     {/* Mobile Menu Button */}
@@ -74,6 +143,7 @@ function Navbar(props) {
                             type="search"
                             placeholder="Search"
                         />
+<<<<<<< Updated upstream
                         <Link
                             to="/Login"
                             className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-200"
@@ -92,6 +162,34 @@ function Navbar(props) {
                         >
                             Invoice
                         </Link>
+=======
+                        {
+                            showIcon ? 
+                                <div>
+                                    <Link
+                                        to="/Login"
+                                        className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-200"
+                                    >
+                                        Login
+                                    </Link>
+                                    <Link
+                                        to="/Signup"
+                                        className="block px-3 py-2 rounded-md text-base font-medium text-white bg-blue-500 hover:bg-blue-700"
+                                    >
+                                        Signup
+                                    </Link>
+                                </div> : 
+                                <div>
+                                    <Link
+                                        to="/Invoice"
+                                        className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-200"
+                                    >
+                                        Invoice
+                                    </Link>
+                                    <button className="w-full text-left text-white block px-3 py-2 rounded-md text-base font-medium bg-red-500 hover:bg-red-700" onClick={handleLogout}>Logout</button>
+                                </div>
+                        }
+>>>>>>> Stashed changes
                     </div>
                 </div>
             )}

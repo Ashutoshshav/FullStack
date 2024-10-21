@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from "react-router-dom";
 import axios from 'axios';
 import { z } from 'zod';
 
-// Zod schema with proper error messages
 const schema = z.object({
     name: z.string()
         .min(1, "Name is required")
@@ -30,19 +29,24 @@ const schema = z.object({
         .regex(/[\W_]/, "Password must contain at least one special character"),
 });
 
-function Signup() {
+function AddNewAdmin({ setIsAdmin }) {
+    // let token = localStorage.getItem("token");
+    const token = sessionStorage.getItem('token');
     const navigate = useNavigate();
     const [data, setData] = useState({
         name: "",
         mobileno: "",
         email: "",
         address: "",
-        gstno: "",
+        role: "",
         password: "",
     });
-
+    
     const [errorMsg, setErrorMsg] = useState({});
-
+    
+    useEffect(() => {
+        setIsAdmin(true);
+    }, [])
     // Handle input changes
     let handleChange = (e) => {
         let { name, value } = e.target;
@@ -80,11 +84,15 @@ function Signup() {
                 console.log("Form submitted successfully", validation.data);
 
                 // Axios call to backend
-                const response = await axios.post("http://192.168.0.252:3000/api/user/signup", data);
+                const response = await axios.post("http://192.168.0.252:3000/api/adminaccess/addnewadmin", data, {
+                    headers: {
+                        Authorization: `${token}`,
+                    },
+                });
                 setErrorMsg({ error: response.data });
                 if (response.data == "Signup Successfully") {
                     console.log(response.data);
-                    navigate("/Login")
+                    navigate("/SellerKPI")
                     setErrorMsg({ success: response.data.message || "Signup successful!" });
                 }
             }
@@ -96,7 +104,7 @@ function Signup() {
     return (
         <div className='flex items-center justify-center min-h-screen bg-gray-100'>
             <div className="bg-white shadow-lg rounded-lg p-8 max-w-sm w-full">
-                <h1 className='text-2xl font-bold text-center text-gray-800 mb-6'>Sign Up</h1>
+                <h1 className='text-2xl font-bold text-center text-gray-800 mb-6'>Admin Signup</h1>
 
                 {/* Show general error or success message */}
                 {errorMsg.error ? (<p className="text-center text-red-500 font-medium mb-4">{errorMsg.error}</p>) : ""}
@@ -161,14 +169,14 @@ function Signup() {
                         </div>
 
                         <div className="mb-1">
-                            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="gstno">GST No</label>
+                            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="role">Role</label>
                             <input
                                 className="shadow appearance-none border rounded w-full py-2 px-1 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                 type="text"
-                                id='gstno'
-                                placeholder='Enter GST No'
-                                name='gstno'
-                                value={data.gstno}
+                                id='role'
+                                placeholder='Enter His Role'
+                                name='role'
+                                value={data.role}
                                 onChange={handleChange}
                             />
                         </div>
@@ -200,4 +208,4 @@ function Signup() {
     );
 }
 
-export default Signup;
+export default AddNewAdmin;

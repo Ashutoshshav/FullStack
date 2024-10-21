@@ -14,6 +14,12 @@ async function getSellerKPI(req, res) {
         let getTotalVendorPayment = await pool.request()
             .query('SELECT COUNT(*) AS Total_VendorPayment_No FROM Purchase_History WHERE Payment_sts = 1')
 
+<<<<<<< Updated upstream
+=======
+        let getTotalTransporterPayment = await pool.request()
+            .query('SELECT COUNT(*) AS Total_TransporterPayment_No FROM Transport_Master WHERE Payment_sts = 1')
+
+>>>>>>> Stashed changes
         // console.log(getTotalVendorPayment.recordset[0].Total_VendorPayment_No)
 
         let getActiveCustomer = await pool.request()
@@ -63,6 +69,14 @@ async function getSellerKPI(req, res) {
 
         // console.log(getTotalPurchase.recordset[0].TotalPurchase)
 
+<<<<<<< Updated upstream
+=======
+        let getTotalTransport = await pool.request()
+            .query('SELECT SUM(Payment_Amt) AS TotalTransport FROM Transport_Master WHERE MONTH(Date) = MONTH(GETDATE())AND YEAR(Date) = YEAR(GETDATE());')
+
+        // console.log(getTotalTransport.recordset[0].TotalTransport)
+
+>>>>>>> Stashed changes
         const timezone = 'Asia/Kolkata';
 
         const currentDate = moment.tz(timezone);
@@ -73,7 +87,11 @@ async function getSellerKPI(req, res) {
             financialPerformance: {
                 outstandingCustomers: getTotalCustPayment.recordset[0].Total_CustPayment_No,
                 outstandingVendors: getTotalVendorPayment.recordset[0].Total_VendorPayment_No,
+<<<<<<< Updated upstream
                 outstandingTransport: 0,
+=======
+                outstandingTransport: getTotalTransporterPayment.recordset[0].Total_TransporterPayment_No,
+>>>>>>> Stashed changes
             },
             customerPerformance: {
                 totalCust: getAllCustomer.recordset[0].Total_Cust_No,
@@ -90,12 +108,20 @@ async function getSellerKPI(req, res) {
             monthStatics: {
                 totalSale: getTotalSale.recordset[0].TotalSale,
                 totalPurchase: getTotalPurchase.recordset[0].TotalPurchase,
+<<<<<<< Updated upstream
                 totalTransportCost: 0,
+=======
+                totalTransportCost: getTotalTransport.recordset[0].TotalTransport,
+>>>>>>> Stashed changes
             },
             avgMonthStatics: {
                 avgTotalSale: getTotalSale.recordset[0].TotalSale / currentDay,
                 avgTotalPurchase: getTotalPurchase.recordset[0].TotalPurchase / currentDay,
+<<<<<<< Updated upstream
                 avgTotalTransportCost: 0 / 7,
+=======
+                avgTotalTransportCost: getTotalTransport.recordset[0].TotalTransport / currentDay,
+>>>>>>> Stashed changes
             }
         }
 

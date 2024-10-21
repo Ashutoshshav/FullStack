@@ -32,7 +32,39 @@ function getUser(token) {
     }
 }
 
+function setTokenForAdmin(admin) {
+    if(admin) {
+        let token = jwt.sign(
+            {
+                id: admin.Admin_id,
+                email: admin.Email,
+                mob: admin.MobNo,
+            },
+            process.env.ADMIN_SECRET_KEY
+        )
+        
+        return token;
+    } else {
+        return console.log("Admin is not coming in setToken")
+    }
+}
+
+function getAdminByToken(token) {
+    if(!token) {
+        return "token not getting in getAdminByToken"
+    } else {
+        try {
+            let admin = jwt.verify(token, process.env.ADMIN_SECRET_KEY)
+            return admin;
+        } catch(err) {
+            console.log(err + " getAdminByToken")
+        }
+    }
+}
+
 module.exports = {
     setToken,
     getUser,
+    setTokenForAdmin,
+    getAdminByToken,
 }

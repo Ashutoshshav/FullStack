@@ -9,6 +9,7 @@ require('iisnode-env').config();
 const app = express();
 const config = require("./Utils/Connection");
 const { handleVerifyUser } = require("./Middlewares/UserTokenVerify");
+const { handleVerifyAdmin } = require("./Middlewares/AdminTokenVerify")
 
 const productRoute = require("./Routes/ProductRoute");
 const cartRoute = require("./Routes/CartRoute");
@@ -16,6 +17,11 @@ const orderRoute = require("./Routes/OrderRoute");
 const userRoute = require("./Routes/UserRoute");
 const invoiceRoute = require("./Routes/InvoiceRoute")
 const sellerKPIRoute = require("./Routes/SellerKPIRoute")
+<<<<<<< Updated upstream
+=======
+const adminRoute = require("./Routes/AdminRoute")
+const adminAccess = require("./Routes/AdminAccessRoute")
+>>>>>>> Stashed changes
 const { scheduleInvoice } = require("./Controllers/InvoiceControllers");
 
 const port = process.env.PORT || 3000;
@@ -35,10 +41,19 @@ app.use(express.static(path.join(__dirname, 'public', 'dist')));
 
 // API routes
 app.use("/api/user/", userRoute);
+<<<<<<< Updated upstream
 app.use("/api/invoice", handleVerifyUser, invoiceRoute)
 app.use("/api/cart/", handleVerifyUser, cartRoute);
 app.use("/api/order/", handleVerifyUser, orderRoute);
 app.use("/api/seller/", sellerKPIRoute);
+=======
+app.use("/api/admin/", adminRoute);
+app.use("/api/invoice", handleVerifyUser, invoiceRoute)
+app.use("/api/cart/", handleVerifyUser, cartRoute);
+app.use("/api/order/", handleVerifyUser, orderRoute);
+app.use("/api/seller/", handleVerifyAdmin, sellerKPIRoute);
+app.use("/api/adminaccess/", handleVerifyAdmin, adminAccess);
+>>>>>>> Stashed changes
 app.use("/", productRoute);
 
 // Catch-all handler for any requests that don’t match an API route

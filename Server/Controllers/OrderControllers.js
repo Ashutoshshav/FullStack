@@ -7,7 +7,7 @@ async function handleDeliverySchedule(req, res) {
     try {
         const deliverySchedule = generateDeliverySchedule()
 
-        console.log(deliverySchedule)
+        // console.log(deliverySchedule)
 
         res.status(200).send(deliverySchedule)
     } catch (err) {
@@ -28,7 +28,11 @@ async function handleSubmitOrder(req, res) {
             .query(`SELECT MAX(OrderID) AS Last_OrderID FROM Order_Data`);
 
         let lastOrderID = getLastOrderID.recordset[0].Last_OrderID
+<<<<<<< Updated upstream
         console.log(lastOrderID)
+=======
+        // console.log(lastOrderID)
+>>>>>>> Stashed changes
         const result = await pool.request()
             .input('Cust_ID', sql.Int, Cust_ID)
             .input('OrderDate', sql.Date, currentISTDate)
@@ -38,7 +42,11 @@ async function handleSubmitOrder(req, res) {
         // console.log(Last_Order)
 
         let OrderDate = moment.tz('Asia/Kolkata').format('YYYY-MM-DD');
+<<<<<<< Updated upstream
         console.log(OrderDate)
+=======
+        // console.log(OrderDate)
+>>>>>>> Stashed changes
 
         let DeliverySlot = selectedSchedule
 
@@ -52,7 +60,11 @@ async function handleSubmitOrder(req, res) {
 
             let LastEditOrderDtime = moment().tz('Asia/Kolkata').format('YYYY-MM-DD HH:mm:ss');
 
+<<<<<<< Updated upstream
             console.log(LastEditOrderDtime + "LastEditOrderDtime")
+=======
+            // console.log(LastEditOrderDtime + "LastEditOrderDtime")
+>>>>>>> Stashed changes
 
             for (const item of count) {
                 let { SKUID } = item;
@@ -105,6 +117,7 @@ async function handleSubmitOrder(req, res) {
 
         // }
         setDeliverySlot(Cust_ID, OrderID, DeliverySlot)
+        res.status(200).send("Order Saved Successfully")
     } catch (err) {
         console.log(err)
     }
@@ -116,6 +129,10 @@ async function handleDeleteOrder(req, res) {
     try {
         let OrderDate = moment.tz('Asia/Kolkata').format('YYYY-MM-DD');
         let OrderDeleted = 1;
+<<<<<<< Updated upstream
+=======
+        // console.log(OrderDate + " OrderDate")
+>>>>>>> Stashed changes
         const pool = await connectDB()
         // console.log("handleDeleteOrder")
         let setOrderDeleted = await pool.request()
@@ -123,6 +140,11 @@ async function handleDeleteOrder(req, res) {
                     .input('Cust_ID', sql.Int, Cust_ID)
                     .input('OrderDeleted', sql.Int, OrderDeleted)
                     .query(`UPDATE Order_Data SET OrderDeleted = 1  WHERE Cust_ID = @Cust_ID AND OrderDate = @OrderDate`)
+<<<<<<< Updated upstream
+=======
+
+        return res.status(200).send("Order Deleted")
+>>>>>>> Stashed changes
     } catch(err) {
         console.log(err)
     }

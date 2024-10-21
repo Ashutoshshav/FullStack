@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import CustomerContext from '../../Contexts/CustomerContext/CustomerContext';
 import Customer from '../Customer/Customer';
 import OrderSchedule from '../../Components/OrderSchedule/OrderSchedule';
+import Swal from 'sweetalert2';
 
 function Home() {
     const navigate = useNavigate();
@@ -84,13 +85,68 @@ function Home() {
             if(selectedSchedule) {
                 let response = await axios.post("http://192.168.0.252:3000/api/order/submitOrder", {count, selectedSchedule }, {
                     headers: {
-                      Authorization: `${token}`,
+                        Authorization: `${token}`,
                     },
                 })
+                if (response.status === 200) {
+                Swal.fire({
+                    position: "center",
+                    icon: "success",
+                    title: "Order Saved Successfully",
+                    showConfirmButton: false,
+                    timer: 2000,
+                    customClass: {
+                        popup: 'p-6 bg-gray-100 rounded-lg shadow-xl',     // Popup styling
+                        title: 'text-xl font-semibold text-gray-700',      // Title styling
+                        htmlContainer: 'text-sm text-gray-600',            // Text inside the popup
+                        confirmButton: 'bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700' // Confirm button styling
+                    }
+                });
+                }
             } else {
-                setErrorMsg({ errorForSchedule: "First Select Sutable Schedule" })
+                Swal.fire({
+                    title: 'First Select Delivery Schedule From Top',  // Message
+                    icon: 'warning',                         // Optional, you can add an icon like 'warning'
+                    customClass: {
+                        popup: 'p-6 bg-white rounded-lg shadow-xl',   // Popup styling
+                        title: 'text-xl font-semibold text-gray-700', // Title styling
+                    }
+                });                
             }
         } catch(err) {
+            console.log(err)
+        }
+    }
+
+    let handleDeleteOrder = async () => {
+        try {
+            Swal.fire({
+                title: "Are you sure?",
+                text: "You want to Delete Order",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, Delete!"
+            }).then(async (result) => {
+                if (result.isConfirmed) {
+                    let response = await axios.get("http://192.168.0.252:3000/api/order/deleteOrder", {
+                        headers: {
+                            Authorization: `${token}`,
+                        },
+                    })
+                    if(response.status === 200) {
+                        await Swal.fire({
+                            title: "Deleted!",
+                            text: "You have Successfully Deleted Order.",
+                            icon: "success",
+                            timer: 2000,
+                        });
+                        window.location.reload();
+                    }
+                }
+            });
+        } catch (err) {
             console.log(err)
         }
     }
@@ -110,7 +166,11 @@ function Home() {
         fetchData()
     }, [])
     return (
+<<<<<<< Updated upstream
         <div className="bg-gray-50 min-h-screen">
+=======
+        <div className="min-h-screen">
+>>>>>>> Stashed changes
             {errorMsg.errorForSchedule && (
                 <p className="text-red-500 text-lg text-center">{errorMsg.errorForSchedule}</p>
             )}
@@ -171,7 +231,11 @@ function Home() {
                     </table>
                 </div>
                 <div className="sm:flex text-base gap-4 justify-center mt-3">
+<<<<<<< Updated upstream
                     <button className="sm:w-auto w-full py-2 px-20 font-semibold bg-blue-600 text-lg rounded-3xl text-white m-0 my-3 transition-colors hover:bg-blue-800 active:bg-blue-900">Edit</button>
+=======
+                    <button className="sm:w-auto w-full py-2 px-20 font-semibold bg-blue-600 text-lg rounded-3xl text-white m-0 my-3 transition-colors hover:bg-blue-800 active:bg-blue-900" onClick={handleDeleteOrder}>Delete</button>
+>>>>>>> Stashed changes
                     <button className="sm:w-auto w-full py-2 px-20 font-semibold bg-blue-600 text-lg rounded-3xl text-white m-0 my-3 transition-colors hover:bg-blue-800 active:bg-blue-900" onClick={handleSubmitOrder}>Save</button>
                 </div>
             </div>

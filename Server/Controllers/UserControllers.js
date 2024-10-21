@@ -9,6 +9,7 @@ async function handleUserSignup(req, res) {
     let Address = address
     let GSTNo = gstno
     let Password = password
+    let Cat_ID = 1;
     console.log(Name_of_Cust, MobNo, Email, Address, GSTNo, Password)
     try {
         const pool = await connectDB()
@@ -37,7 +38,8 @@ async function handleUserSignup(req, res) {
                 .input('Address', sql.VarChar, Address)
                 .input('GSTNo', sql.VarChar, GSTNo)
                 .input('Password', sql.VarChar, Password)
-                .query(`INSERT INTO CustMaster (Cust_ID, Name_of_Cust, MobNo, Email, Address, GSTNo, Password) VALUES (@Cust_ID, @Name_of_Cust, @MobNo, @Email, @Address, @GSTNo, @Password)`)
+                .input('Cat_ID', sql.Int, Cat_ID)
+                .query(`INSERT INTO CustMaster (Cust_ID, Name_of_Cust, MobNo, Email, Address, GSTNo, Password, Cat_ID) VALUES (@Cust_ID, @Name_of_Cust, @MobNo, @Email, @Address, @GSTNo, @Password, @Cat_ID)`)
     
             // console.log(result)
             return res.status(200).send("Signup Successfully")
@@ -51,6 +53,41 @@ async function handleUserSignup(req, res) {
 }
 
 async function handleUserLogin(req, res) {
+    let { mobileno, email, password } = req.body;
+    let Email = email
+    let Password = password
+    let MobNo = mobileno
+    console.log(Email, Password, MobNo)
+    try {
+        const pool = await connectDB()
+
+        let result = await pool.request()
+            .input('Email', sql.VarChar, Email)
+            .input('MobNo', sql.VarChar, MobNo)
+            .query(`SELECT * FROM CustMaster WHERE Email = @Email OR MobNo = @MobNo`)
+
+        if (result.recordset.length === 0) {
+            return res.send("User not Exist")
+        }
+
+        // console.log(result.recordset[0].Password)
+        let user = result.recordset[0];
+        console.log(user)
+        if (user.Cust_ID) {
+            if (user.Password == Password) {
+                let token = setToken(user)
+                // console.log(token)
+                return res.json({ token: token })
+            } else {
+                return res.send("Password is Wrong")
+            }
+        }
+    } catch (err) {
+        console.log(err)
+    }
+}
+
+async function handleLoginAll(req, res) {
     let { email, password } = req.body;
     let Email = email
     let Password = password
