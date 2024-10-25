@@ -16,12 +16,24 @@
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.21.1",
+<<<<<<< Updated upstream:ID/SERVER/package.json
+=======
+    "html-pdf": "^3.0.1",
+>>>>>>> Stashed changes:Server/package.json
     "iisnode-env": "^1.0.3",
     "jsonwebtoken": "^9.0.2",
     "moment-timezone": "^0.5.46",
     "mssql": "^11.0.1",
+<<<<<<< Updated upstream:ID/SERVER/package.json
     "nodemon": "^3.1.7",
     "path": "^0.12.7"
+=======
+    "node-cron": "^3.0.3",
+    "nodemailer": "^6.9.15",
+    "path": "^0.12.7",
+    "pdfkit": "^0.15.0",
+    "pm2": "^5.4.2"
+>>>>>>> Stashed changes:Server/package.json
   },
   "devDependencies": {
     "nodemon": "^3.1.7"

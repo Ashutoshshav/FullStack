@@ -1,8 +1,12 @@
+<<<<<<< Updated upstream:PROJECT/Client/src/Components/Navbar/Navbar.jsx
 <<<<<<< Updated upstream
 import React, { useState } from "react";
 =======
 import React, { useState, useEffect } from "react";
 >>>>>>> Stashed changes
+=======
+import React, { useState, useEffect } from "react";
+>>>>>>> Stashed changes:Client/src/Components/Navbar/Navbar.jsx
 import Logo from "../../assets/Logo.png";
 import { Link, useNavigate } from "react-router-dom";
 import Swal from 'sweetalert2';
@@ -13,8 +17,11 @@ function Navbar(props) {
         navigate("/Customer");
     }
 
+<<<<<<< Updated upstream:PROJECT/Client/src/Components/Navbar/Navbar.jsx
 <<<<<<< Updated upstream
 =======
+=======
+>>>>>>> Stashed changes:Client/src/Components/Navbar/Navbar.jsx
     const [showIcon, setShowIcon] = useState(true)
     
     useEffect(() => {
@@ -24,14 +31,20 @@ function Navbar(props) {
         }
     })
 
+<<<<<<< Updated upstream:PROJECT/Client/src/Components/Navbar/Navbar.jsx
 >>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes:Client/src/Components/Navbar/Navbar.jsx
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
     const toggleMobileMenu = () => {
         setIsMobileMenuOpen(!isMobileMenuOpen);
     };
+<<<<<<< Updated upstream:PROJECT/Client/src/Components/Navbar/Navbar.jsx
 <<<<<<< Updated upstream
 =======
+=======
+>>>>>>> Stashed changes:Client/src/Components/Navbar/Navbar.jsx
 
     let handleLogout = async () => {
         Swal.fire({
@@ -56,7 +69,10 @@ function Navbar(props) {
             }
           });
     }
+<<<<<<< Updated upstream:PROJECT/Client/src/Components/Navbar/Navbar.jsx
 >>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes:Client/src/Components/Navbar/Navbar.jsx
     return (
         <nav className="bg-gray-200 shadow-md w-full border-b border-blue-200">
             <div className="max-w-full mx-auto sm:px-6 lg:px-8">
@@ -78,6 +94,7 @@ function Navbar(props) {
                     </div>
 
                     {/* Login and Cart Buttons */}
+<<<<<<< Updated upstream:PROJECT/Client/src/Components/Navbar/Navbar.jsx
 <<<<<<< Updated upstream
                     <div className="hidden md:flex items-center gap-6">
                         <Link to="/Login">
@@ -94,6 +111,8 @@ function Navbar(props) {
                             </button>
                         </Link>
 =======
+=======
+>>>>>>> Stashed changes:Client/src/Components/Navbar/Navbar.jsx
                     <div className="hidden md:flex items-center gap-3">
                         {
                             showIcon ? 
@@ -116,7 +135,10 @@ function Navbar(props) {
                                 <button className="text-white font-bold block px-5 py-3 rounded-lg text-base bg-red-500 hover:bg-red-700" onClick={handleLogout}>Logout</button>
                             </div>
                         }
+<<<<<<< Updated upstream:PROJECT/Client/src/Components/Navbar/Navbar.jsx
 >>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes:Client/src/Components/Navbar/Navbar.jsx
                     </div>
 
                     {/* Mobile Menu Button */}
@@ -143,6 +165,7 @@ function Navbar(props) {
                             type="search"
                             placeholder="Search"
                         />
+<<<<<<< Updated upstream:PROJECT/Client/src/Components/Navbar/Navbar.jsx
 <<<<<<< Updated upstream
                         <Link
                             to="/Login"
@@ -163,6 +186,8 @@ function Navbar(props) {
                             Invoice
                         </Link>
 =======
+=======
+>>>>>>> Stashed changes:Client/src/Components/Navbar/Navbar.jsx
                         {
                             showIcon ? 
                                 <div>
@@ -189,7 +214,10 @@ function Navbar(props) {
                                     <button className="w-full text-left text-white block px-3 py-2 rounded-md text-base font-medium bg-red-500 hover:bg-red-700" onClick={handleLogout}>Logout</button>
                                 </div>
                         }
+<<<<<<< Updated upstream:PROJECT/Client/src/Components/Navbar/Navbar.jsx
 >>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes:Client/src/Components/Navbar/Navbar.jsx
                     </div>
                 </div>
             )}

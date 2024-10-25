@@ -166,11 +166,15 @@ function Home() {
         fetchData()
     }, [])
     return (
+<<<<<<< Updated upstream:PROJECT/Client/src/Pages/Home/Home.jsx
 <<<<<<< Updated upstream
         <div className="bg-gray-50 min-h-screen">
 =======
         <div className="min-h-screen">
 >>>>>>> Stashed changes
+=======
+        <div className="min-h-screen">
+>>>>>>> Stashed changes:Client/src/Pages/Home/Home.jsx
             {errorMsg.errorForSchedule && (
                 <p className="text-red-500 text-lg text-center">{errorMsg.errorForSchedule}</p>
             )}
@@ -231,11 +235,15 @@ function Home() {
                     </table>
                 </div>
                 <div className="sm:flex text-base gap-4 justify-center mt-3">
+<<<<<<< Updated upstream:PROJECT/Client/src/Pages/Home/Home.jsx
 <<<<<<< Updated upstream
                     <button className="sm:w-auto w-full py-2 px-20 font-semibold bg-blue-600 text-lg rounded-3xl text-white m-0 my-3 transition-colors hover:bg-blue-800 active:bg-blue-900">Edit</button>
 =======
                     <button className="sm:w-auto w-full py-2 px-20 font-semibold bg-blue-600 text-lg rounded-3xl text-white m-0 my-3 transition-colors hover:bg-blue-800 active:bg-blue-900" onClick={handleDeleteOrder}>Delete</button>
 >>>>>>> Stashed changes
+=======
+                    <button className="sm:w-auto w-full py-2 px-20 font-semibold bg-blue-600 text-lg rounded-3xl text-white m-0 my-3 transition-colors hover:bg-blue-800 active:bg-blue-900" onClick={handleDeleteOrder}>Delete</button>
+>>>>>>> Stashed changes:Client/src/Pages/Home/Home.jsx
                     <button className="sm:w-auto w-full py-2 px-20 font-semibold bg-blue-600 text-lg rounded-3xl text-white m-0 my-3 transition-colors hover:bg-blue-800 active:bg-blue-900" onClick={handleSubmitOrder}>Save</button>
                 </div>
             </div>
