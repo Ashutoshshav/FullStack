@@ -1,0 +1,228 @@
+{/* <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
+        {Object.keys(statusCategories).map((status) => {
+          const categoryNumber = statusCategories[status];
+          const filteredWork = workData.filter(
+            (work) => work.WorkCategory === categoryNumber
+          );
+
+          if (filteredWork.length > 0) {
+            return filteredWork.map((work) => (
+              <div key={work.WorkID} className="bg-white shadow-md rounded-lg p-6">
+                <div className="mb-3">
+                  <span className={`text-lg font-bold ${status === 'Completed' ? 'text-green-600' : status === 'Urgent' ? 'text-red-600' : 'text-yellow-600'}`}>
+                    {status}
+                  </span>
+                </div>
+
+                <div className="mb-3">
+                  <p className="font-semibold text-gray-700">Employee Work:</p>
+                  <p className="text-gray-600 text-2xl">{work.EmployeeWork}</p>
+                </div>
+
+                <div className="mb-3">
+                  <p className="font-semibold text-gray-700">Assigned By:</p>
+                  <p className="text-gray-600">{work.AssignedBy}</p>
+                </div>
+
+                <div className="mb-3">
+                  <p className="font-semibold text-gray-700">Assigned On:</p>
+                  <p className="text-gray-600">{new Date(work.AssignedDTime).toLocaleString()}</p>
+                </div>
+
+                <div className="mb-3">
+                  <p className="font-semibold text-gray-700">Category:</p>
+                  <p className="text-gray-600">{work.WorkCategory}</p>
+                </div>
+
+                <div>
+                  <p className="font-semibold text-gray-700">Deadline:</p>
+                  <p className="text-gray-600 text-2xl">{new Date(work.Deadline).toLocaleDateString()}</p>
+                </div>
+              </div>
+            ));
+          } else {
+            return (
+              <div key={status} className="bg-white shadow-md rounded-lg p-6 text-center">
+                <p className="text-lg font-bold text-gray-700">{status}</p>
+                <p className="text-gray-500">No work data available</p>
+              </div>
+            );
+          }
+        })}
+      </div> */}
+
+      {/* <h1>MY TASK</h1>
+      <div className="grid justify-items-center grid-cols-[repeat(auto-fill,_minmax(290px,_1fr))]">
+          {workData && workData.map(product => (
+                    <div className="flex border-2 rounded-lg m-3 items-center h-32 shadow-lg hover:shadow-xl transition-shadow" style={{ border: "#045ab1 1px solid" }} key={product.SKUID}>
+                        <div className="w-1/3 h-fit m-1 overflow-hidden rounded-lg">
+                            <img className='h-full w-full object-cover' src={product.Picture} alt={product.SKUName} />
+                        </div>
+                        <div className="w-2/3 text-center flex flex-col">
+                            <p className="font-semibold text-xl">{product.SKUName}</p>
+                            <div className='bg-gray-100 flex justify-evenly items-center rounded-lg font-semibold w-auto'>
+                                <span className='py-3 rounded-full flex items-center justify-center cursor-pointer text-black font-semibold w-1/3 hover:bg-blue-200 active:bg-blue-300 transition-colors' onClick={() => decreaseCount(product.SKUID, product.SKUName, count.Qty + 1)}>
+                                    <i className="fa-solid fa-minus"></i>
+                                </span>
+                                {count.map((item) => item.SKUID === product.SKUID && (
+                                    <p key={item.SKUID} className='w-1/3 text-center'>{item.Qty}</p>
+                                ))}
+                                <span className='py-3 rounded-full flex items-center justify-center cursor-pointer text-black w-1/3 hover:bg-blue-200 active:bg-blue-300 transition-colors' onClick={() => increaseCount(product.SKUID, product.SKUName, count.Qty + 1)}>
+                                    <i className="fa-solid fa-plus"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+          ))}
+      </div> */}
+
+      
+      {/* <div className="overflow-x-auto shadow-md rounded p-4">
+        <table className="table-auto w-full border-collapse border border-gray-300">
+          <thead className="bg-gray-100 text-black">
+            <tr>
+              <th className="border px-4 py-2">Status</th>
+              <th className="border px-4 py-2">Employee Work</th>
+              <th className="border px-4 py-2">Assigned By</th>
+              <th className="border px-4 py-2">Assigned On</th>
+              <th className="border px-4 py-2">Category</th>
+              <th className="border px-4 py-2">Deadline</th>
+            </tr>
+          </thead>
+          <tbody>
+            {Object.keys(statusCategories).map((status) => {
+              const categoryNumber = statusCategories[status];
+              const filteredWork = workData.filter(
+                (work) => work.WorkCategory === categoryNumber
+              );
+
+              if (filteredWork.length > 0) {
+                return filteredWork.map((work) => (
+                  <tr key={work.WorkID}>
+                    <td className={`px-4 py-2 text-center hover:bg-gray-100 ${status === 'Completed' ? 'text-green-600' : status === 'Urgent' ? 'text-red-600' : 'text-yellow-600'}`}>
+                      {status}
+                    </td>
+                    <td className="px-4 py-2">{work.EmployeeWork}</td>
+                    <td className="px-4 py-2">{work.AssignedBy}</td>
+                    <td className="px-4 py-2">
+                      {new Date(work.AssignedDTime).toLocaleString()}
+                    </td>
+                    <td className="px-4 py-2">{work.WorkCategory}</td>
+                    <td className="px-4 py-2">
+                      {new Date(work.Deadline).toLocaleDateString()}
+                    </td>
+                  </tr>
+                ));
+              } else {
+                return (
+                  <tr key={status}>
+                    <td className="px-4 py-2">{status}</td>
+                    <td className="px-4 py-2" colSpan="5">
+                      No work data available
+                    </td>
+                  </tr>
+                );
+              }
+            })}
+          </tbody>
+        </table>
+      </div> */}
+
+      {/* <div className="grid justify-items-center grid-cols-[repeat(auto-fill,_minmax(290px,_1fr))]">
+        {Object.keys(statusCategories).map((status) => {
+          const categoryNumber = statusCategories[status];
+          const filteredWork = workData.filter(
+            (work) => work.WorkCategory === categoryNumber
+          );
+
+          return (
+            <div key={status} className="w-full">
+              <h2 className="font-bold">{status}</h2>
+              <div className="border border-gray-300 p-2 rounded">
+                {filteredWork.length > 0 ? (
+                  filteredWork.map((work) => (
+                    <div
+                      key={work.WorkID}
+                      className="border p-2 my-2 rounded shadow"
+                    >
+                      <h3>{work.EmployeeWork}</h3>
+                      <p>Assigned By: {work.AssignedBy}</p>
+                      <p>
+                        Assigned On:{" "}
+                        {new Date(work.AssignedDTime).toLocaleString()}
+                      </p>
+                      <p>Category: {work.WorkCategory}</p>
+                      <p>
+                        Deadline: {new Date(work.Deadline).toLocaleDateString()}
+                      </p>
+                    </div>
+                  ))
+                ) : (
+                  <p>No work data available for {status}</p>
+                )}
+              </div>
+            </div>
+          );
+        })}
+      </div> */}
+
+      // bg-gradient-to-b from-gray-200 to-blue-200 transition-all duration-500
+
+      {/* <div className="overflow-x-auto shadow-md rounded-xl m-2">
+        <table className="table-auto w-full">
+          <thead className="bg-gray-100 text-black w-full">
+            <tr className="border">
+              <th className="px-4 py-4 font-normal text-gray-500">Status</th>
+              <th className="px-4 py-4 font-normal text-gray-500">Employee Work</th>
+              <th className="px-4 py-4 font-normal text-gray-500">Assigned By</th>
+              <th className="px-4 py-4 font-normal text-gray-500">Assigned On</th>
+              <th className="px-4 py-4 font-normal text-gray-500">Category</th>
+              <th className="px-4 py-4 font-normal text-gray-500">Deadline</th>
+            </tr>
+          </thead>
+          <tbody>
+            {Object.keys(statusCategories).map((status) => {
+              const categoryNumber = statusCategories[status];
+              const filteredWork = workData.filter(
+                (work) => work.WorkCategory === categoryNumber
+              );
+
+              if (filteredWork.length > 0) {
+                return filteredWork.map((work) => (
+                  <tr key={work.WorkID} className="border text-center">
+                    <td className={`px-4 py-3 text-center hover:bg-gray-100 ${status === 'Completed' ? 'text-green-600' : status === 'Urgent' ? 'text-red-600' : 'text-yellow-600'}`}>
+                      {status}
+                    </td>
+                    <td className="px-4 py-2">{work.EmployeeWork}</td>
+                    <td className="px-4 py-2">{work.AssignedBy}</td>
+                    <td className="px-4 py-2">
+                      {new Date(work.AssignedDTime).toLocaleString()}
+                    </td>
+                    <td className="px-4 py-2">{work.WorkCategory}</td>
+                    <td className="px-4 py-2">
+                      {new Date(work.Deadline).toLocaleDateString()}
+                    </td>
+                  </tr>
+                ));
+              } else {
+                return (
+                  <tr key={status} className="border text-center">
+                    <td className="px-4 py-3">{status}</td>
+                    <td className="px-4 py-3" colSpan="5">
+                      No work data available
+                    </td>
+                  </tr>
+                );
+              }
+            })}
+          </tbody>
+        </table>
+      </div> */} 
+
+  const statusCategories = {
+    "Urgent&IMP": 1,
+    Urgent: 2,
+    "In Progress": 3,
+    Important: 4,
+    Completed: 5,
+  };
