@@ -26,7 +26,7 @@ function ScheduleMeeting({ closePopup }) {
         try {
             const assignedWork = { meetingLocation, meetingDescription, meetingDTime };
             let response = await axios.post(
-                "http://192.168.0.252:5000/api/meeting/schedulemeeting",
+                "/api/meeting/schedulemeeting",
                 assignedWork,
                 {
                     headers: {
@@ -65,7 +65,7 @@ function ScheduleMeeting({ closePopup }) {
                                 className="w-full border border-gray-300 rounded px-3 py-2 mt-1"
                                 value={meetingLocation}
                                 onChange={(e) => setMeetingLocation(e.target.value)}
-                                placeholder="Describe the work"
+                                placeholder="Enter Meeting Location"
                                 required
                             />
                         </div>
@@ -79,7 +79,7 @@ function ScheduleMeeting({ closePopup }) {
                                 cols="50"
                                 value={meetingDescription}
                                 onChange={(e) => setMeetingDescription(e.target.value)}
-                                placeholder="Enter Remark of Task"
+                                placeholder="Enter Meeting Description"
                                 required
                             ></textarea>
                         </div>
@@ -94,14 +94,15 @@ function ScheduleMeeting({ closePopup }) {
                                 timeIntervals={30}
                                 dateFormat="Pp"
                                 className="w-full border border-gray-300 rounded px-3 py-2 mt-1"
-                                placeholderText="Select Deadline"
+                                placeholderText="Select Date&Time"
+                                minDate={new Date()}
                             />
                         </div>
 
                         <div className="flex justify-end space-x-4">
                             <button
                                 type="button"
-                                className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+                                className="px-4 py-2 bg-customBlue text-white rounded hover:bg-customBlue2"
                                 onClick={handleSubmit}
                             >
                                 Submit

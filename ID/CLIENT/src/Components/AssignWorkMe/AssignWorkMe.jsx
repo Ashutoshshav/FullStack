@@ -28,7 +28,7 @@ const AssignWorkMe = ({ closePopup }) => {
     try {
       const assignedWork = { workName, empWork, workCat, deadline, remark };
       let response = await axios.post(
-        "http://192.168.0.252:5000/api/empolyeeportal/assignwork",
+        "/api/empolyeeportal/assignwork",
         assignedWork,
         {
           headers: {
@@ -82,18 +82,6 @@ const AssignWorkMe = ({ closePopup }) => {
               </select>
             </div>
 
-            {/* <div className="mb-4">
-              <label className="block text-gray-700">Work Category:</label>
-              <input
-                type="text"
-                className="w-full border border-gray-300 rounded px-3 py-2 mt-1"
-                value={workCat}
-                onChange={(e) => setWorkCat(e.target.value)}
-                placeholder="Enter Work Category"
-                required
-              />
-            </div> */}
-
             <div className="mb-4">
               <label className="block text-gray-700">Work Remarks:</label>
               <textarea
@@ -119,13 +107,14 @@ const AssignWorkMe = ({ closePopup }) => {
                 dateFormat="Pp"
                 className="w-full border border-gray-300 rounded px-3 py-2 mt-1"
                 placeholderText="Select Deadline"
+                minDate={new Date()}
               />
             </div>
 
             <div className="flex justify-end space-x-4">
               <button
                 type="button"
-                className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+                className="px-4 py-2 bg-customBlue text-white rounded hover:bg-customBlue2"
                 onClick={handleSubmit}
               >
                 Submit

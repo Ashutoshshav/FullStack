@@ -13,7 +13,7 @@ function AllWorks(props) {
     let fetchData = async (token) => {
         try {
             // console.log(token)
-            let response = await axios.get("http://192.168.0.252:5000/api/work/allworks", {
+            let response = await axios.get("/api/work/allworks", {
                 headers: {
                     Authorization: `${token}`,
                 },

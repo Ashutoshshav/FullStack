@@ -5,24 +5,16 @@ import Navbar from './Components/Navbar/Navbar';
 import Home from './Pages/Home/Home';
 import './App.css';
 import AllWorks from './Pages/AllWorks/AllWorks';
+import SiteVisit from './Pages/SiteVisit/SiteVisit';
+import SiteImages from './Pages/SiteImages/SiteImages';
+import DailyEmployeeEntry from './Pages/DailyEmployeeEntry/DailyEmployeeEntry';
 
 function App() {
     const [isOpen, setIsOpen] = useState(true); // Default to open on desktop
 
     // Handle resize for responsive behavior
     useEffect(() => {
-        const handleResize = () => {
-            if (window.innerWidth < 1000) {
-                setIsOpen(false); // Close sidebar on mobile
-            } else {
-                setIsOpen(true); // Open sidebar on desktop
-            }
-        };
-
-        handleResize(); // Initial check
-        window.addEventListener('resize', handleResize); // Add event listener
-
-        return () => window.removeEventListener('resize', handleResize); // Cleanup
+        setIsOpen(false); 
     }, []);
 
     const toggleNavbar = () => {
@@ -38,6 +30,9 @@ function App() {
                         <Route path="/" element={<Home />} />
                         <Route path="/Login" element={<EmployeeLogin />} />
                         <Route path='/AllWorks' element={<AllWorks />} />
+                        <Route path='/SiteVisit' element={<SiteVisit/>} />
+                        <Route path='/SiteImages' element={<SiteImages/>} />
+                        <Route path='/DailyEmployeeEntry' element={<DailyEmployeeEntry/>} />
                     </Routes>
                 </div>
             </div>

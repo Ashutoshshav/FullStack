@@ -1,14 +1,34 @@
-const express = require("express")
+const express = require("express");
+const multer = require("multer");
 
-const { handleGetWork, handleWorkInfo, handleWorkAssignMe, handleEmployeeTimeIn, handleEmployeeTimeOut, handleEmployeeLoggedStatus, } = require('../Controllers/EmployeePortalController')
+// Multer configuration to handle file uploads
+const storage = multer.memoryStorage();
+const upload = multer({ storage });
 
-const router = express.Router()
+const {
+  handleGetWork,
+  handleWorkInfo,
+  handleWorkAssignMe,
+  handleEmployeeTimeIn,
+  handleEmployeeTimeOut,
+  handleEmployeeLoggedStatus,
+  handleWorkStart,
+  handleGetJobCategory,
+  handlePostSiteImage,
+  handleGetAllEmployee,
+} = require("../Controllers/EmployeePortalController");
 
-router.get("/allwork", handleGetWork)
-router.post("/workdata", handleWorkInfo)
-router.post("/assignwork", handleWorkAssignMe)
-router.post("/timein", handleEmployeeTimeIn)
-router.post("/timeout", handleEmployeeTimeOut)
-router.get("/logstatus", handleEmployeeLoggedStatus)
+const router = express.Router();
 
-module.exports = router
+router.get("/allwork", handleGetWork);
+router.post("/workdata", handleWorkInfo);
+router.post("/assignwork", handleWorkAssignMe);
+router.post("/timein", handleEmployeeTimeIn);
+router.post("/timeout", handleEmployeeTimeOut);
+router.get("/logstatus", handleEmployeeLoggedStatus);
+router.post("/startwork", handleWorkStart);
+router.get("/jobcategory", handleGetJobCategory);
+router.post("/site-image", upload.array('employeeImage'), handlePostSiteImage);
+router.get("/allemployee", handleGetAllEmployee);
+
+module.exports = router;

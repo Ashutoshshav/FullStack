@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link, useNavigate } from 'react-router-dom';
+import moment from "moment";
 import AssignWorkMe from "../../Components/AssignWorkMe/AssignWorkMe";
 import ScheduleMeeting from "../../Components/ScheduleMeeting/ScheduleMeeting";
 
@@ -21,7 +22,7 @@ function Home(props) {
     // console.log(token)
     try {
       let response = await axios.get(
-        "http://192.168.0.252:5000/api/empolyeeportal/allwork",
+        "/api/empolyeeportal/allwork",
         {
           headers: {
             Authorization: `${token}`,
@@ -45,7 +46,7 @@ function Home(props) {
   let fetchMeetingData = async () => {
     try {
       let response = await axios.get(
-        "http://192.168.0.252:5000/api/meeting/employeemeeting",
+        "/api/meeting/employeemeeting",
         {
           headers: {
             Authorization: `${token}`,
@@ -62,7 +63,7 @@ function Home(props) {
 
   let fetchAvailableMeetingSchedule = async (nDay) => {
     try {
-      let response = await axios.post("http://192.168.0.252:5000/api/meeting/freemeetschedule", { nDay },
+      let response = await axios.post("/api/meeting/freemeetschedule", { nDay },
         {
           headers: {
             Authorization: `${token}`,
@@ -133,6 +134,20 @@ function Home(props) {
     item.FirstHalfStatus === 'Available' || item.SecondHalfStatus === 'Available'
   );
 
+  let handleWorkStart = async (workID) => {
+    try {
+      let response = await axios.post("/api/empolyeeportal/startwork", {workID}, {
+        headers: {
+          Authorization: `${token}`,
+        },
+      },)
+      
+      console.log(response);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
   return (
     <div className="w-full">
       <div>
@@ -163,16 +178,17 @@ function Home(props) {
                   <table className="w-full table-fixed">
                     <thead className="w-full text-left sticky top-0 bg-white">
                       <tr className="">
-                        <th className="w-1/2 pl-2">Name of Task</th>
-                        <th className="w-1/2 pl-2">Compleation Target</th>
+                        <th className="w-4/10 pl-2">Name of Task</th>
+                        <th className="w-6/10 pl-2">Compleation Target</th>
                       </tr>
                     </thead>
                     <tbody>
                       {urgentTasks.map((task) => (
-                        <tr key={task.WorkID}>
+                        <tr className="cursor-pointer" key={task.WorkID} onClick={() => handleWorkStart(task.WorkID)}>
                           <td className="text-left pl-2">{task.WorkName}</td>
                           <td className="text-left pl-2">
-                            {new Date(task.Deadline).toLocaleString()}
+                            {moment(task.Deadline).format("Do, MMM, YYYY, HH:mm:ss A")}
+                            {/* {new Date(task.Deadline).toLocaleString()} */}
                           </td>
                         </tr>
                       ))}
@@ -208,10 +224,11 @@ function Home(props) {
                   </thead>
                   <tbody>
                     {pendingTasks.map((task) => (
-                      <tr key={task.WorkID}>
+                      <tr className="cursor-pointer" key={task.WorkID} onClick={() => handleWorkStart(task.WorkID)}>
                         <td className="text-left pl-2">{task.WorkName}</td>
                         <td className="text-left pl-2">
-                          {new Date(task.Deadline).toLocaleString()}
+                          {moment(task.Deadline).format("Do, MMM, YYYY, HH:mm:ss A")}
+                          {/* {new Date(task.Deadline).toLocaleString()} */}
                         </td>
                       </tr>
                     ))}
@@ -246,10 +263,11 @@ function Home(props) {
                   </thead>
                   <tbody>
                     {inactiveTasks.map((task) => (
-                      <tr key={task.WorkID}>
+                      <tr className="cursor-pointer" key={task.WorkID} onClick={() => handleWorkStart(task.WorkID)}>
                         <td className="text-left pl-2">{task.WorkName}</td>
                         <td className="text-left pl-2">
-                          {new Date(task.Deadline).toLocaleString()}
+                          {moment(task.Deadline).format("Do, MMM, YYYY, HH:mm:ss A")}
+                          {/* {new Date(task.Deadline).toLocaleString()} */}
                         </td>
                       </tr>
                     ))}
@@ -298,7 +316,8 @@ function Home(props) {
                       {meetingData.map((task) => (
                         <tr key={task.MeetingID}>
                           <td className="text-left pl-2">
-                            {new Date(task.MeetingDTime).toLocaleString()}
+                            {moment(task.MeetingDTime).format("Do, MMM, YYYY, HH:mm:ss A")}
+                            {/* {new Date(task.MeetingDTime).toLocaleString()} */}
                           </td>
                           <td className="text-left pl-2">{task.MeetingLocation}</td>
                           <td className="text-left pl-2">{task.MeetingDescription}</td>
@@ -342,7 +361,10 @@ function Home(props) {
                       <tbody className="">
                         {availableSlots.map((item) => (
                           <tr key={item.MeetingDate}>
-                            <td className="text-left pl-2">{new Date(item.MeetingDate).toLocaleDateString('en-GB')}</td>
+                            <td className="text-left pl-2">
+                              {moment(item.MeetingDate).format("Do, MMM, YYYY")}
+                              {/* {new Date(item.MeetingDate).toLocaleDateString('en-GB')} */}
+                            </td>
                             <td className="text-left pl-2">
                               {item.FirstHalfStatus === 'Available'
                                 ? 'First Half Available'

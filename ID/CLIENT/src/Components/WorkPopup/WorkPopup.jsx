@@ -9,7 +9,7 @@ function WorkPopup({ workID, closePopup }) {
         // console.log(token);
 
         try {
-            let response = await axios.post("http://192.168.0.252:5000/api/empolyeeportal/workdata",
+            let response = await axios.post("/api/empolyeeportal/workdata",
                 { workID },
                 {
                     headers: {

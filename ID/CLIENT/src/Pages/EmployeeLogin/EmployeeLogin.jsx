@@ -59,7 +59,7 @@ function EmployeeLogin() {
                 setErrorMsg(errorMessages);
                 setSuccessMsg("");
             } else {
-                const response = await axios.post("http://192.168.0.252:5000/api/employee/login", data);
+                const response = await axios.post("/api/employee/login", data);
 
                 if (!response.data.token) {
                     if (response.data === "User not Exist") {
@@ -85,7 +85,7 @@ function EmployeeLogin() {
     };
 
     return (
-        <div className='flex items-center justify-center min-h-screen bg-gray-100'>
+        <div className='flex items-center justify-center min-h-screen bg-gray-100 -mt-4'>
             <div className="bg-white shadow-lg rounded-lg p-8 max-w-sm w-full">
                 <h1 className='text-3xl font-bold text-center text-gray-800 mb-6'>Login</h1>
                 {successMsg && <p className="text-center text-green-500 font-medium mb-4">{successMsg}</p>}
@@ -121,7 +121,7 @@ function EmployeeLogin() {
                         </div>
 
                         <button
-                            className="bg-blue-700 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-green-500 mt-2"
+                            className="bg-customBlue hover:bg-customBlue2 text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-green-500 mt-2"
                             type="submit"
                         >
                             Submit

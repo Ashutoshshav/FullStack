@@ -12,24 +12,47 @@ const AssignWorkPopup = ({ closePopup }) => {
   const [remark, setRemark] = useState("");
   const [deadline, setDeadline] = useState(null);
   const [token, setToken] = useState(null);
+  const [allEmployee, setAllEmployee] = useState([]);
   const [errorMsg, setErrorMsg] = useState({
     error: "",
     success: "",
   });
 
   useEffect(() => {
-    setToken(localStorage.getItem("token"));
-  })
+    const token = localStorage.getItem("token");
+    setToken(token);
+    if (token) {
+      handleGetAllEmployee(token);
+    }
+  }, [])
 
   const toggleModal = () => {
     closePopup(false);
+  };
+
+  let handleGetAllEmployee = async (token) => {
+    try {
+      let response = await axios.get(
+        "/api/empolyeeportal/allemployee",
+        {
+          headers: {
+            Authorization: `${token}`,
+          },
+        }
+      );
+
+      setAllEmployee(response.data);
+      // console.log(response.data);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const handleSubmit = async () => {
     try {
       const assignedWork = { empID, workName, empWork, workCat, deadline, remark };
       let response = await axios.post(
-        "http://192.168.0.252:5000/api/work/assigning",
+        "/api/work/assigning",
         assignedWork,
         {
           headers: {
@@ -62,33 +85,36 @@ const AssignWorkPopup = ({ closePopup }) => {
           )}
           <form>
             <div className="mb-4">
-              <label className="block text-gray-700">Employee ID:</label>
-              <input
-                type="text"
-                className="w-full border border-gray-300 rounded px-3 py-2 mt-1"
-                value={empID}
-                onChange={(e) => setEmpID(e.target.value)}
-                placeholder="Enter Employee ID"
-                required
-              />
+              <label htmlFor="empID">Select Employee</label>
+              <select className="w-full border border-gray-300 rounded px-3 py-2 mt-1" id="empID" name="" value={empID} onChange={(e) => setEmpID(e.target.value)}>
+                <option value="">Select Employee</option>
+                {
+                  allEmployee &&
+                  allEmployee.map((employee) => (
+                    <option key={employee.EmployeeID} value={employee.EmployeeID}>{employee.EmployeeName}</option>
+                  ))
+                }
+              </select>
             </div>
 
             <div className="mb-4">
-              <label className="block text-gray-700">Work Name:</label>
+              <label className="block text-gray-700" htmlFor="workName">Work Name:</label>
               <input
                 type="text"
+                id="workName"
                 className="w-full border border-gray-300 rounded px-3 py-2 mt-1"
                 value={workName}
                 onChange={(e) => setWorkName(e.target.value)}
-                placeholder="Enter Employee ID"
+                placeholder="Enter Work Name"
                 required
               />
             </div>
 
             <div className="mb-4">
-              <label className="block text-gray-700">Employee Work:</label>
+              <label className="block text-gray-700" htmlFor="empWork">Employee Work:</label>
               <input
                 type="text"
+                id="empWork"
                 className="w-full border border-gray-300 rounded px-3 py-2 mt-1"
                 value={empWork}
                 onChange={(e) => setEmpWork(e.target.value)}
@@ -100,7 +126,7 @@ const AssignWorkPopup = ({ closePopup }) => {
             <div className="mb-4">
               <label className="block text-gray-700" htmlFor="taskSelect">Work Category:</label>
               <select id="taskSelect" className="w-full border border-gray-300 rounded px-3 py-2 mt-1" value={workCat} onChange={(e) => setWorkCat(e.target.value)}>
-                <option className="w-full border border-gray-300 rounded px-3 py-2 mt-1">--Select an option--</option>
+                <option className="w-full border border-gray-300 rounded px-3 py-2 mt-1">--Select Work Category--</option>
                 <option className="w-full border border-gray-300 rounded px-3 py-2 mt-1" value={1}>Urgent & Important Task</option>
                 <option className="w-full border border-gray-300 rounded px-3 py-2 mt-1" value={2}>Pending Task</option>
                 <option className="w-full border border-gray-300 rounded px-3 py-2 mt-1" value={3}>Inactive Task</option>
@@ -132,13 +158,14 @@ const AssignWorkPopup = ({ closePopup }) => {
                 dateFormat="Pp"
                 className="w-full border border-gray-300 rounded px-3 py-2 mt-1"
                 placeholderText="Select Deadline"
+                minDate={new Date()}
               />
             </div>
 
             <div className="flex justify-end space-x-4">
               <button
                 type="button"
-                className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+                className="px-4 py-2 bg-customBlue text-white rounded hover:bg-customBlue2"
                 onClick={handleSubmit}
               >
                 Submit
