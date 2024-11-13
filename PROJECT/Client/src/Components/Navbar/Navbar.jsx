@@ -1,12 +1,4 @@
-<<<<<<< Updated upstream:PROJECT/Client/src/Components/Navbar/Navbar.jsx
-<<<<<<< Updated upstream
-import React, { useState } from "react";
-=======
 import React, { useState, useEffect } from "react";
->>>>>>> Stashed changes
-=======
-import React, { useState, useEffect } from "react";
->>>>>>> Stashed changes:Client/src/Components/Navbar/Navbar.jsx
 import Logo from "../../assets/Logo.png";
 import { Link, useNavigate } from "react-router-dom";
 import Swal from 'sweetalert2';
@@ -17,11 +9,6 @@ function Navbar(props) {
         navigate("/Customer");
     }
 
-<<<<<<< Updated upstream:PROJECT/Client/src/Components/Navbar/Navbar.jsx
-<<<<<<< Updated upstream
-=======
-=======
->>>>>>> Stashed changes:Client/src/Components/Navbar/Navbar.jsx
     const [showIcon, setShowIcon] = useState(true)
     
     useEffect(() => {
@@ -31,20 +18,11 @@ function Navbar(props) {
         }
     })
 
-<<<<<<< Updated upstream:PROJECT/Client/src/Components/Navbar/Navbar.jsx
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes:Client/src/Components/Navbar/Navbar.jsx
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
     const toggleMobileMenu = () => {
         setIsMobileMenuOpen(!isMobileMenuOpen);
     };
-<<<<<<< Updated upstream:PROJECT/Client/src/Components/Navbar/Navbar.jsx
-<<<<<<< Updated upstream
-=======
-=======
->>>>>>> Stashed changes:Client/src/Components/Navbar/Navbar.jsx
 
     let handleLogout = async () => {
         Swal.fire({
@@ -69,10 +47,6 @@ function Navbar(props) {
             }
           });
     }
-<<<<<<< Updated upstream:PROJECT/Client/src/Components/Navbar/Navbar.jsx
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes:Client/src/Components/Navbar/Navbar.jsx
     return (
         <nav className="bg-gray-200 shadow-md w-full border-b border-blue-200">
             <div className="max-w-full mx-auto sm:px-6 lg:px-8">
@@ -86,33 +60,10 @@ function Navbar(props) {
 
                     {/* Search Bar */}
                     <div className="hidden md:flex flex-1 items-center justify-center">
-                        <input
-                            className="border rounded-lg px-4 py-2 w-2/3 md:w-1/2 lg:w-1/3 focus:outline-none"
-                            type="search"
-                            placeholder="Search"
-                        />
+                        <input className="border rounded-lg px-4 py-2 w-2/3 md:w-1/2 lg:w-1/3 focus:outline-none" type="search" placeholder="Search"/>
                     </div>
 
                     {/* Login and Cart Buttons */}
-<<<<<<< Updated upstream:PROJECT/Client/src/Components/Navbar/Navbar.jsx
-<<<<<<< Updated upstream
-                    <div className="hidden md:flex items-center gap-6">
-                        <Link to="/Login">
-                            <button className="bg-green-500 text-white font-bold px-5 py-3 rounded-lg hover:bg-green-600 active:bg-green-700">Login</button>
-                        </Link>
-                        <Link to="/Signup">
-                            <button className="bg-blue-500 text-white font-bold px-5 py-3 rounded-lg hover:bg-blue-600 active:bg-blue-700">
-                                Signup
-                            </button>
-                        </Link>
-                        <Link to="/Invoice">
-                            <button className="bg-green-500 text-white font-bold px-5 py-3 rounded-lg hover:bg-green-600 active:bg-green-700">
-                                Invoice
-                            </button>
-                        </Link>
-=======
-=======
->>>>>>> Stashed changes:Client/src/Components/Navbar/Navbar.jsx
                     <div className="hidden md:flex items-center gap-3">
                         {
                             showIcon ? 
@@ -135,19 +86,13 @@ function Navbar(props) {
                                 <button className="text-white font-bold block px-5 py-3 rounded-lg text-base bg-red-500 hover:bg-red-700" onClick={handleLogout}>Logout</button>
                             </div>
                         }
-<<<<<<< Updated upstream:PROJECT/Client/src/Components/Navbar/Navbar.jsx
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes:Client/src/Components/Navbar/Navbar.jsx
                     </div>
 
                     {/* Mobile Menu Button */}
                     <div className="flex items-center md:hidden">
-                        <button
-                            type="button"
+                        <button type="button"
                             className="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:bg-gray-200 focus:outline-none"
-                            onClick={toggleMobileMenu}
-                        >
+                            onClick={toggleMobileMenu}>
                             <svg className="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"></path>
                             </svg>
@@ -160,64 +105,28 @@ function Navbar(props) {
             {isMobileMenuOpen && (
                 <div className="md:hidden">
                     <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                        <input
-                            className="w-full border rounded-lg px-4 py-2 md:w-1/2 lg:w-1/3 focus:outline-none"
-                            type="search"
-                            placeholder="Search"
-                        />
-<<<<<<< Updated upstream:PROJECT/Client/src/Components/Navbar/Navbar.jsx
-<<<<<<< Updated upstream
-                        <Link
-                            to="/Login"
-                            className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-200"
-                        >
-                            Login
-                        </Link>
-                        <Link
-                            to="/Signup"
-                            className="block px-3 py-2 rounded-md text-base font-medium text-white bg-blue-500 hover:bg-blue-700"
-                        >
-                            Signup
-                        </Link>
-                        <Link
-                            to="/Invoice"
-                            className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-200"
-                        >
-                            Invoice
-                        </Link>
-=======
-=======
->>>>>>> Stashed changes:Client/src/Components/Navbar/Navbar.jsx
+                        <input className="w-full border rounded-lg px-4 py-2 md:w-1/2 lg:w-1/3 focus:outline-none"
+                            type="search" placeholder="Search" />
                         {
                             showIcon ? 
                                 <div>
-                                    <Link
-                                        to="/Login"
-                                        className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-200"
-                                    >
+                                    <Link to="/Login"
+                                        className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-200">
                                         Login
                                     </Link>
-                                    <Link
-                                        to="/Signup"
-                                        className="block px-3 py-2 rounded-md text-base font-medium text-white bg-blue-500 hover:bg-blue-700"
-                                    >
+                                    <Link to="/Signup"
+                                        className="block px-3 py-2 rounded-md text-base font-medium text-white bg-blue-500 hover:bg-blue-700">
                                         Signup
                                     </Link>
                                 </div> : 
                                 <div>
-                                    <Link
-                                        to="/Invoice"
-                                        className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-200"
-                                    >
+                                    <Link to="/Invoice"
+                                        className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-200">
                                         Invoice
                                     </Link>
                                     <button className="w-full text-left text-white block px-3 py-2 rounded-md text-base font-medium bg-red-500 hover:bg-red-700" onClick={handleLogout}>Logout</button>
                                 </div>
                         }
-<<<<<<< Updated upstream:PROJECT/Client/src/Components/Navbar/Navbar.jsx
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes:Client/src/Components/Navbar/Navbar.jsx
                     </div>
                 </div>
             )}

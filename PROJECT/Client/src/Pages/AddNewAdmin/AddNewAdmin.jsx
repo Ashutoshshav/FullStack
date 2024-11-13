@@ -84,7 +84,7 @@ function AddNewAdmin({ setIsAdmin }) {
                 console.log("Form submitted successfully", validation.data);
 
                 // Axios call to backend
-                const response = await axios.post("http://192.168.0.252:3000/api/adminaccess/addnewadmin", data, {
+                const response = await axios.post("/api/adminaccess/addnewadmin", data, {
                     headers: {
                         Authorization: `${token}`,
                     },

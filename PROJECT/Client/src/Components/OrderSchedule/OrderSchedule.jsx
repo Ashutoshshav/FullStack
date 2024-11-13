@@ -8,7 +8,7 @@ function OrderSchedule({ onChangeSchedule }) {
 
     let fetchDeliveryDate = async () => {
         try {
-            let response = await axios.get("http://192.168.0.252:3000/api/order/deliverySchedules", {
+            let response = await axios.get("/api/order/deliverySchedules", {
                 headers: {
                     Authorization: `${token}`,
                 },
@@ -34,7 +34,7 @@ function OrderSchedule({ onChangeSchedule }) {
             </h2>
             <br />
             <div className="inline-block flex-col border-2 rounded-lg my-3 mx-2 px-3">
-                <p className="font-semibold text-xl">Order Date</p>
+                <p className="font-semibold text-xl">Delivery Date</p>
                 <p className="font-semibold text-blue-500 text-xl pl-10">
                     {deliveryDate.deliveryDate}
                 </p>

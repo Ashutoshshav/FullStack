@@ -8,7 +8,7 @@ function Customer({ schedule }) {
 
     let fetchCartQty = async () => {
         try {
-            let response = await axios.get("http://localhost:3000/api/cart/productQty", {
+            let response = await axios.get("/api/cart/productQty", {
                 headers: {
                   Authorization: `${token}`,
                 },
@@ -35,7 +35,7 @@ function Customer({ schedule }) {
             try {
                 console.log(data)
                 console.log(schedule)
-                let response = await axios.post("http://localhost:3000/api/order/submitOrder", {data, schedule }, {
+                let response = await axios.post("/api/order/submitOrder", {data, schedule }, {
                     headers: {
                       Authorization: `${token}`,
                     },

@@ -19,7 +19,6 @@ const schema = z.object({
 
 function Login() {
     const navigate = useNavigate();
-    const { setCustomer } = useContext(CustomerContext);
     const [errorMsg, setErrorMsg] = useState({});
     const [successMsg, setSuccessMsg] = useState("");
     const [mobLogin, setMobLogin] = useState(false)
@@ -58,40 +57,20 @@ function Login() {
             const validation = schema.safeParse(data);
             console.log(validation);
 
-            const response = await axios.post("http://192.168.0.252:3000/api/user/login", data);
+            const response = await axios.post("/api/user/login", data);
 
-<<<<<<< Updated upstream
-                // Axios call to backend
-                const response = await axios.post("http://192.168.0.252:3000/api/user/login", data);
-
-                if (response.data.token == null) {
-                    if(response.data == "User not Exist") {
-                        navigate("/Signup")
-                    } else {
-                        setErrorMsg({ form: response.data || "Login failed!" }); // Show backend error
-=======
                 if (!response.data.token) {
                     if (response.data === "User not Exist") {
                         navigate("/Signup")
                     } else {
                         setErrorMsg({ form: response.data || "Login failed!" });
->>>>>>> Stashed changes
                         setSuccessMsg("");
                     }
                 } else {
                     localStorage.setItem("token", response.data.token);
                     setSuccessMsg("Login successful!");
-<<<<<<< Updated upstream
-                    setErrorMsg({}); // Clear error messages on success
-                    navigate("/")
-                    // Optionally, set customer data here with setCustomer(response.data.customer);
-                    // if (response.data.customer) {
-                    //     setCustomer(response.data.customer);
-                    // }
-=======
                     setErrorMsg({});
                     navigate("/");
->>>>>>> Stashed changes
                 }
             
             // if (false) {
@@ -180,7 +159,10 @@ function Login() {
                             />
                             {errorMsg.password && <p className="text-red-500 text-xs italic">{errorMsg.password}</p>}
                         </div>
-                        <Link className='m-0 w-fit text-green-600 hover:underline hover:text-green-800' onClick={() => handleSetMobLogin(mobLogin)}>{mobLogin ? "Login by Email" : "Login by Mob No"}</Link>
+                        <div className='flex justify-between'>
+                            <Link className='m-0 w-fit text-green-600 hover:underline hover:text-green-800' onClick={() => handleSetMobLogin(mobLogin)}>{mobLogin ? "Login by Email" : "Login by Mob No"}</Link>
+                            <Link className='m-0 w-fit text-green-600 hover:underline hover:text-green-800' to="/ResetPassword">Forget Password</Link>
+                        </div>
                         <button
                             className="bg-blue-700 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-green-500 mt-2"
                             type="submit"

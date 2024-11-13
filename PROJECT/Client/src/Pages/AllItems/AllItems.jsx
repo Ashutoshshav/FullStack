@@ -11,7 +11,7 @@ function AllItems({ setIsAdmin }) {
     let fetchAllItems = async () => {
         try {
             setIsAdmin(true);
-            let response = await axios.get("http://192.168.0.252:3000/api/adminaccess/allitems", {
+            let response = await axios.get("/api/adminaccess/allitems", {
                 headers: {
                     Authorization: `${token}`,
                 },
@@ -33,7 +33,7 @@ function AllItems({ setIsAdmin }) {
         const newState = currentState === 1 ? 0 : 1; // Toggle between 1 and 0
 
         try {
-            await axios.post(`http://192.168.0.252:3000/api/adminaccess/itemdisable`, {
+            await axios.post(`/api/adminaccess/itemdisable`, {
                 SKUID: id,
                 disabledItem: newState,
             }, {
@@ -66,7 +66,7 @@ function AllItems({ setIsAdmin }) {
     // Handle API call to update price when input loses focus or a button is clicked
     const updatePrice = async (skuid, newPrice, SKU_Name) => {
         try {
-            await axios.post(`http://192.168.0.252:3000/api/adminaccess/updateprice`, {
+            await axios.post(`/api/adminaccess/updateprice`, {
                 SKUID: skuid,
                 Purchase_Amount: newPrice,
                 SKU_Name: SKU_Name,

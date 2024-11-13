@@ -80,7 +80,7 @@ function Signup() {
                 console.log("Form submitted successfully", validation.data);
 
                 // Axios call to backend
-                const response = await axios.post("http://192.168.0.252:3000/api/user/signup", data);
+                const response = await axios.post("/api/user/signup", data);
                 setErrorMsg({ error: response.data });
                 if (response.data == "Signup Successfully") {
                     console.log(response.data);

@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from 'axios';
 import { Link, useNavigate } from "react-router-dom";
-<<<<<<< Updated upstream
-=======
 import Swal from 'sweetalert2';
->>>>>>> Stashed changes
 
 function Invoice(props) {
     const navigate = useNavigate();
@@ -19,29 +16,17 @@ function Invoice(props) {
         error: "",
     })
     const [errorMsg, setErrorMsg] = useState("");
-<<<<<<< Updated upstream
-=======
     let [tableShow, setTableShow] = useState(false);
     const [loading, setLoading] = useState(false);
     const [loading2, setLoading2] = useState(false);
->>>>>>> Stashed changes
 
     let fetchDeliveryDetails = async () => {
         try {
-            let response = await axios.get("http://192.168.0.252:3000/api/invoice/generated", {
+            let response = await axios.get("/api/invoice/generated", {
                 headers: {
                     Authorization: `${token}`,
                 },
             })
-<<<<<<< Updated upstream
-            if(response.data.error) {
-                setErrorMsg("Invoice will generate soon")
-            } else {
-            }
-            console.log(response.data)
-            // console.log(response.data.custInvoicedOrder)
-            setDeliveryDetails(response.data)
-=======
             if (response.data.error == "No orders found for the specified date.") {
                 setErrorMsg("Invoice will generate soon")
                 Swal.fire({
@@ -65,54 +50,38 @@ function Invoice(props) {
                     }
                 });
             }
->>>>>>> Stashed changes
         } catch (err) {
             console.log(err)
         }
     }
 
     const downloadInvoice = async () => {
-<<<<<<< Updated upstream
-        try {
-            const response = await axios.get('http://192.168.0.252:3000/api/invoice/generateInvoice', {
-              responseType: 'blob', // Important to get the PDF as a binary file (blob)
-              headers: {
-                Authorization: `${token}`,
-            },
-            },);
-      
-=======
         setLoading(true);
         try {
-            const response = await axios.get('http://192.168.0.252:3000/api/invoice/generateInvoice', {
+            const response = await axios.get('/api/invoice/generateInvoice', {
                 responseType: 'blob', // Important to get the PDF as a binary file (blob)
                 headers: {
                     Authorization: `${token}`,
                 },
             },);
 
->>>>>>> Stashed changes
             const fileURL = window.URL.createObjectURL(new Blob([response.data]));
             const fileLink = document.createElement('a');
             fileLink.href = fileURL;
             fileLink.setAttribute('download', 'invoice.pdf'); // File name
             document.body.appendChild(fileLink);
             fileLink.click(); // Trigger the download
-<<<<<<< Updated upstream
-          } catch (err) {
-            console.error('Error downloading the PDF:', err);
-=======
         } catch (err) {
             console.error('Error downloading the PDF:', err);
         } finally {
-            setLoading(false); // Reset loading state to false after the operation
+            setLoading(false);
         }
     }
 
     let mailInvoice = async () => {
         setLoading2(true)
         try {
-            let response = await axios.get("http://192.168.0.252:3000/api/invoice/sendinvoice", {
+            let response = await axios.get("/api/invoice/sendinvoice", {
                 headers: {
                     Authorization: `${token}`,
                 },
@@ -137,7 +106,6 @@ function Invoice(props) {
             console.log(err)
         } finally {
             setLoading2(false); // Reset loading state to false after the operation
->>>>>>> Stashed changes
         }
     }
 
@@ -152,11 +120,7 @@ function Invoice(props) {
     return (
         <div>
             <div>
-<<<<<<< Updated upstream
-                <h1 className="text-3xl text-center font-medium my-3">Seller Invoicing - Form</h1>
-=======
                 <h1 className="text-3xl text-center font-medium my-3">Invoicing - Form</h1>
->>>>>>> Stashed changes
                 <h2 className="sm:w-96 sm:rounded-r-lg w-full text-center font-medium text-white text-xl inline-block py-2" style={{ backgroundColor: "#045ab1" }}>
                     Delivery Order Schedule
                 </h2>
@@ -165,72 +129,18 @@ function Invoice(props) {
                     <div className="inline-block flex-col border-2 rounded-lg my-3 mx-2 px-3">
                         <p className="font-semibold text-xl">Order Date</p>
                         <p className="font-semibold text-blue-500 text-xl pl-10">
-<<<<<<< Updated upstream
-                            {deliveryDetails.OrderDate}
-=======
                             {deliveryDetails.OrderDate || "NA"}
->>>>>>> Stashed changes
                         </p>
                     </div>
                     <div className="inline-block flex-col border-2 rounded-lg my-3 mx-2 px-3">
                         <p className="font-semibold text-xl">Delivery Schedule</p>
                         <p className="font-semibold text-blue-500 text-xl pl-10">
-<<<<<<< Updated upstream
-                            Between {deliveryDetails.startTime} To {deliveryDetails.endTime}
-=======
                             Between {deliveryDetails.startTime || "NA"} To {deliveryDetails.endTime || "NA"}
->>>>>>> Stashed changes
                         </p>
                     </div>
                 </div>
             </div>
 
-<<<<<<< Updated upstream
-            <div className="mt-7">
-                <h2 className="sm:w-96 sm:rounded-r-lg w-full text-center font-medium text-white text-xl inline-block py-2" style={{ backgroundColor: "#045ab1" }}>
-                    Item Cart and Qty Rate Entry
-                </h2>
-
-                <div className="overflow-x-auto mt-2">
-                    <table className="min-w-full border border-gray-200">
-                        <thead>
-                            <tr className="text-white" style={{ backgroundColor: "#045ab1" }}>
-                                <th className="py-2 px-4 border">SNo.</th>
-                                <th className="py-2 px-4 border">Item Name</th>
-                                <th className="py-2 px-4 border">Qty</th>
-                                {/* <th className="py-2 px-4 border">Unit</th> */}
-                                <th className="py-2 px-4 border">Rate</th>
-                                <th className="py-2 px-4 border">Amount</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {deliveryDetails.custInvoicedOrder && deliveryDetails.custInvoicedOrder.map((item, index) => (
-                                <tr key={item.SKUID}>
-                                    <td className="py-2 px-4 border">{index + 1}</td>
-                                    <td className="py-2 px-4 border">{item.SKUName}</td>
-                                    <td className="py-2 px-4 border">{item.Qty}</td>
-                                    <td className="py-2 px-4 border">{item.Rate}</td>
-                                    <td className="py-2 px-4 border">{item.Amount}</td>
-                                </tr>
-                            ))}
-                            <tr>
-                                <td className="py-2 px-4 text-center font-semibold text-xl" colSpan={5}><span className="font-bold">Total Amount  :  </span>{deliveryDetails.Total_Amount}</td>
-                            </tr>
-                            <tr>
-                                <td className="py-2 px-4 text-center text-xl font-normal" colSpan={5}><span>Transport  :  </span>{300}</td>
-                            </tr>
-                            <tr>
-                                <td className="py-2 px-4 text-center font-semibold text-2xl" colSpan={5}><span>Net Payable Amount  :  </span>{deliveryDetails.Total_Amount + 300}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <div className="sm:flex text-base gap-3 justify-center">
-                <button className="sm:w-auto w-full py-2 px-20 font-semibold text-lg rounded-3xl text-white my-3" style={{ backgroundColor: "#045ab1" }}>Save</button>
-                <button className="sm:w-auto w-full py-2 px-20 font-semibold text-lg rounded-3xl text-white my-3" style={{ backgroundColor: "#045ab1" }} onClick={downloadInvoice}>Send Invoice</button>
-            </div>
-=======
             {
                 tableShow ?
                     <div>
@@ -324,7 +234,6 @@ function Invoice(props) {
                     </div> :
                     <></>
             }
->>>>>>> Stashed changes
         </div>
     );
 }

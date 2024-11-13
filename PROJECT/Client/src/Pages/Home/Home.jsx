@@ -25,7 +25,7 @@ function Home() {
     let decreaseCount = async (SKUID, SKUName, Qty) => {
         //console.log(Cust_ID, SKUID, Qty)
         try {
-            let response = await axios.post("http://192.168.0.252:3000/api/cart/remove", { SKUID, SKUName, Qty }, {
+            let response = await axios.post("/api/cart/remove", { SKUID, SKUName, Qty }, {
                 headers: {
                     Authorization: `${token}`,
                 },
@@ -42,7 +42,7 @@ function Home() {
     let increaseCount = async (SKUID, SKUName, Qty) => {
         try {
             console.log(SKUID, Qty)
-            let response = await axios.post("http://192.168.0.252:3000/api/cart/insert", { SKUID, SKUName, Qty }, {
+            let response = await axios.post("/api/cart/insert", { SKUID, SKUName, Qty }, {
                 headers: {
                     Authorization: `${token}`,
                 },
@@ -59,7 +59,7 @@ function Home() {
     // console.log(token)
     let fetchCartQty = async () => {
         try {
-            let response = await axios.get("http://192.168.0.252:3000/api/cart/productQty", {
+            let response = await axios.get("/api/cart/productQty", {
                 headers: {
                     Authorization: `${token}`,
                 },
@@ -83,7 +83,7 @@ function Home() {
             console.log(count)
             console.log(selectedSchedule)
             if(selectedSchedule) {
-                let response = await axios.post("http://192.168.0.252:3000/api/order/submitOrder", {count, selectedSchedule }, {
+                let response = await axios.post("/api/order/submitOrder", {count, selectedSchedule }, {
                     headers: {
                         Authorization: `${token}`,
                     },
@@ -130,7 +130,7 @@ function Home() {
                 confirmButtonText: "Yes, Delete!"
             }).then(async (result) => {
                 if (result.isConfirmed) {
-                    let response = await axios.get("http://192.168.0.252:3000/api/order/deleteOrder", {
+                    let response = await axios.get("/api/order/deleteOrder", {
                         headers: {
                             Authorization: `${token}`,
                         },
@@ -154,7 +154,7 @@ function Home() {
     useEffect(() => {
         async function fetchData() {
             try {
-                let response = await axios.get("http://192.168.0.252:3000/getProduct")
+                let response = await axios.get("/api/getProduct")
                 //console.log(response.data)
                 setData(response.data)
                 fetchCartQty()
@@ -166,15 +166,7 @@ function Home() {
         fetchData()
     }, [])
     return (
-<<<<<<< Updated upstream:PROJECT/Client/src/Pages/Home/Home.jsx
-<<<<<<< Updated upstream
-        <div className="bg-gray-50 min-h-screen">
-=======
         <div className="min-h-screen">
->>>>>>> Stashed changes
-=======
-        <div className="min-h-screen">
->>>>>>> Stashed changes:Client/src/Pages/Home/Home.jsx
             {errorMsg.errorForSchedule && (
                 <p className="text-red-500 text-lg text-center">{errorMsg.errorForSchedule}</p>
             )}
@@ -193,13 +185,13 @@ function Home() {
                         <div className="w-2/3 text-center flex flex-col">
                             <p className="font-semibold text-xl">{product.SKUName}</p>
                             <div className='bg-gray-100 flex justify-evenly items-center rounded-lg font-semibold w-auto'>
-                                <span className='py-3 rounded-full flex items-center justify-center cursor-pointer text-black font-semibold w-1/3 hover:bg-blue-200 active:bg-blue-300 transition-colors' onClick={() => decreaseCount(product.SKUID, product.SKUName, count.Qty + 1)}>
+                                <span className='py-3 rounded-full flex items-center justify-center cursor-pointer text-black font-semibold w-1/3 active:bg-blue-300 transition-colors' onClick={() => decreaseCount(product.SKUID, product.SKUName, count.Qty + 1)}>
                                     <i className="fa-solid fa-minus"></i>
                                 </span>
                                 {count.map((item) => item.SKUID === product.SKUID && (
                                     <p key={item.SKUID} className='w-1/3 text-center'>{item.Qty}</p>
                                 ))}
-                                <span className='py-3 rounded-full flex items-center justify-center cursor-pointer text-black w-1/3 hover:bg-blue-200 active:bg-blue-300 transition-colors' onClick={() => increaseCount(product.SKUID, product.SKUName, count.Qty + 1)}>
+                                <span className='py-3 rounded-full flex items-center justify-center cursor-pointer text-black w-1/3 active:bg-blue-300 transition-colors' onClick={() => increaseCount(product.SKUID, product.SKUName, count.Qty + 1)}>
                                     <i className="fa-solid fa-plus"></i>
                                 </span>
                             </div>
@@ -219,7 +211,7 @@ function Home() {
                                 <th className="py-2 px-4 border">SNo.</th>
                                 <th className="py-2 px-4 border">Item Name</th>
                                 <th className="py-2 px-4 border">Qty</th>
-                                <th className="py-2 px-4 border">Unit</th>
+                                {/* <th className="py-2 px-4 border">Unit</th> */}
                             </tr>
                         </thead>
                         <tbody>
@@ -228,22 +220,14 @@ function Home() {
                                     <td className="py-2 px-4 border">{index + 1}</td>
                                     <td className="py-2 px-4 border">{item.SKUName}</td>
                                     <td className="py-2 px-4 border text-center">{item.Qty}</td>
-                                    <td className="py-2 px-4 border">Kg.</td>
+                                    {/* <td className="py-2 px-4 border">Kg.</td> */}
                                 </tr>
                             ))}
                         </tbody>
                     </table>
                 </div>
                 <div className="sm:flex text-base gap-4 justify-center mt-3">
-<<<<<<< Updated upstream:PROJECT/Client/src/Pages/Home/Home.jsx
-<<<<<<< Updated upstream
-                    <button className="sm:w-auto w-full py-2 px-20 font-semibold bg-blue-600 text-lg rounded-3xl text-white m-0 my-3 transition-colors hover:bg-blue-800 active:bg-blue-900">Edit</button>
-=======
                     <button className="sm:w-auto w-full py-2 px-20 font-semibold bg-blue-600 text-lg rounded-3xl text-white m-0 my-3 transition-colors hover:bg-blue-800 active:bg-blue-900" onClick={handleDeleteOrder}>Delete</button>
->>>>>>> Stashed changes
-=======
-                    <button className="sm:w-auto w-full py-2 px-20 font-semibold bg-blue-600 text-lg rounded-3xl text-white m-0 my-3 transition-colors hover:bg-blue-800 active:bg-blue-900" onClick={handleDeleteOrder}>Delete</button>
->>>>>>> Stashed changes:Client/src/Pages/Home/Home.jsx
                     <button className="sm:w-auto w-full py-2 px-20 font-semibold bg-blue-600 text-lg rounded-3xl text-white m-0 my-3 transition-colors hover:bg-blue-800 active:bg-blue-900" onClick={handleSubmitOrder}>Save</button>
                 </div>
             </div>

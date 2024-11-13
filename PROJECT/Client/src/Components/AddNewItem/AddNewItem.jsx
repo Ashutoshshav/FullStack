@@ -14,7 +14,7 @@ function AddNewItem({ closeModal, onItemAdded }) {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            let response = await axios.post("http://192.168.0.252:3000/api/adminaccess/addnewitem", {
+            let response = await axios.post("/api/adminaccess/addnewitem", {
                 SKUName,
                 Picture,
                 Price,

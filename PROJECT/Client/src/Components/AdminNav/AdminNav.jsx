@@ -56,10 +56,8 @@ function AdminNav(props) {
                     </Link>
                 </div>
                 {/* Toggle Button */}
-                <button
-                    onClick={toggleNavbar}
-                    className="text-blue-500 text-xl py-2 px-4 rounded-full"
-                >
+                <button onClick={toggleNavbar}
+                    className="text-blue-500 text-xl py-2 px-4 rounded-full">
                     <i className={`fas ${isOpen ? "fa-times" : "fa-bars"}`}></i>
                 </button>
             </div>
@@ -67,13 +65,19 @@ function AdminNav(props) {
             {/* Side Navbar */}
             <nav
                 className={`z-10 fixed top-0 right-0 w-64 rounded-b-md mt-16 bg-white text-white transform transition-transform ${isOpen ? "translate-x-0" : "translate-x-full"
-                    }`}
-            >
+            }`}>
                 <ul className="flex flex-col p-4 space-y-3">
                     <li>
                         <Link to="/SellerKPI" onClick={closeNavbar}>
                             <button className="w-full flex items-center text-left text-blue-500 px-4 py-3 rounded-lg hover:bg-gray-200 active:bg-gray-300">
                                 <i className="fas fa-home mr-2"></i> <span>Home</span>
+                            </button>
+                        </Link>
+                    </li>
+                    <li>
+                        <Link to="/PlacedOrder" onClick={closeNavbar}>
+                            <button className="w-full flex items-center text-left text-blue-500 px-4 py-3 rounded-lg hover:bg-gray-200 active:bg-gray-300">
+                            <i className="fa-solid fa-cart-flatbed mr-2"></i> <span>Orders</span>
                             </button>
                         </Link>
                     </li>
