@@ -1,0 +1,218 @@
+﻿@model ChartViewModel
+
+@{
+    var firstChartData = Model.FirstChart.FirstOrDefault();  // Access the first chart data
+    var secondChartData = Model.SecondChart.FirstOrDefault();  // Access the second chart data
+}
+
+<div class="mt-16 flex min-h-screen w-full flex-col justify-center gap-4 bg-gray-900 p-4 sm:m-0">
+    <div class="grid-cols-1 grid w-full max-w-full gap-8 sm:grid-cols-2">
+        <div class="rounded-lg bg-gray-700 p-3 shadow-lg hover:shadow-xl">
+            <div class="mb-3 flex justify-between text-lg font-semibold text-gray-100 sm:text-xl">
+                <h2>TOTAL LAMPS</h2>
+                <h2 class="text-2xl">@(firstChartData.TotalNoOfStreetlight)</h2>
+            </div>
+            <!-- First Chart with Legend -->
+            <div class="flex items-center justify-around text-gray-100">
+                <canvas id="firstChart" class="w-3/5 sm:w-80"></canvas>
+                <ul id="firstChartLegend" class="mt-4 space-y-1 text-sm"></ul>
+            </div>
+        </div>
+
+        <div class="rounded-lg bg-gray-700 p-3 shadow-lg hover:shadow-xl">
+            <div class="mb-3 flex justify-between text-lg font-semibold text-gray-100 sm:text-xl">
+                <h2>TOTAL CCMS</h2>
+                <h2 class="text-2xl">@(secondChartData.ON + secondChartData.OFF + secondChartData.NC)</h2>
+            </div>
+            <!-- Second Chart with Legend -->
+            <div class="flex items-center justify-around text-gray-100">
+                <canvas id="secondChart" class="w-3/5 sm:w-80"></canvas>
+                <ul id="secondChartLegend" class="mt-4 space-y-1 text-sm"></ul>
+            </div>
+        </div>
+    </div>
+    <div class='grid-cols-1 grid gap-3 sm:grid-cols-2 lg:grid-cols-4'>
+        <div class='flex flex-col rounded-lg bg-gray-700 p-4 text-gray-100 shadow-lg hover:shadow-xl'>
+            <div class='flex justify-between py-2'>
+                <h2 class='text-lg font-medium'>TOTAL CCMS</h2>
+                <p class='text-lg font-medium'>@(secondChartData.ON + secondChartData.OFF + secondChartData.NC)</p>
+            </div>
+            <div class='flex justify-between'>
+                <p>AUTO</p>
+                <button>474</button>
+            </div>
+            <div class='flex justify-between'>
+                <p>BYPASS</p>
+                <button>474</button>
+            </div>
+            <div class='flex justify-between'>
+                <p>NOT COMM.</p>
+                <button>@secondChartData.NC</button>
+            </div>
+            <div class='flex justify-between'>
+                <p>COMM.</p>
+                <button>474</button>
+            </div>
+        </div>
+        <div class='flex flex-col rounded-lg bg-gray-700 p-4 text-gray-100 shadow-lg hover:shadow-xl'>
+            <div class='flex justify-between py-2'>
+                <h2 class='text-lg font-medium'>INPUT ISSUES</h2>
+                <p class='text-lg font-medium'>474</p>
+            </div>
+            <div class='flex justify-between'>
+                <p>LOW VOL</p>
+                <button>474</button>
+            </div>
+            <div class='flex justify-between'>
+                <p>HIGH VOL</p>
+                <button>474</button>
+            </div>
+            <div class='flex justify-between'>
+                <p>POWER FAIL</p>
+                <button>474</button>
+            </div>
+        </div>
+        <div class='flex flex-col rounded-lg bg-gray-700 p-4 text-gray-100 shadow-lg hover:shadow-xl'>
+            <div class='flex justify-between py-2'>
+                <h2 class='text-lg font-medium'>OUTPUT ISSUES</h2>
+                <p class='text-lg font-medium'>474</p>
+            </div>
+            <div class='flex justify-between'>
+                <p>MCB TRIP</p>
+                <button>474</button>
+            </div>
+            <div class='flex justify-between'>
+                <p>HIGH CUR.</p>
+                <button>474</button>
+            </div>
+        </div>
+        <div class='flex flex-col rounded-lg bg-gray-700 p-4 text-gray-100 shadow-lg hover:shadow-xl'>
+            <div class='flex justify-between py-2'>
+                <h2 class='text-lg font-medium'>OTHER ISSUES</h2>
+                <p class='text-lg font-medium'>474</p>
+            </div>
+            <div class='flex justify-between'>
+                <p>CONTRACTOR FAIL</p>
+                <button>474</button>
+            </div>
+            <div class='flex justify-between'>
+                <p>METER COM FAIL</p>
+                <button>474</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    Chart.register({
+        id: 'centerTextPlugin',
+        beforeDraw: function (chart) {
+            if (chart.config.type === 'doughnut') {
+                const { width, height } = chart;
+                const ctx = chart.ctx;
+                const total = chart.data.datasets[0].data.reduce((a, b) => a + b, 0); // Sum of all data
+                const onDevices = chart.data.datasets[0].data[0]; // "ON" value is the first dataset value (adjust as needed)
+
+                // Calculate the percentage of ON devices
+                const onPercentage = ((onDevices / total) * 100).toFixed(2);
+
+                ctx.restore();
+
+                // Font and styling for percentage text
+                const fontSizePercentage = (height / 125).toFixed(2); // Dynamically adjust font size
+                ctx.font = `${fontSizePercentage}em sans-serif`;
+                ctx.textBaseline = 'middle';
+                ctx.fillStyle = '#e3e5e8'; // Text color
+
+                // Calculate the center coordinates for percentage text
+                const percentageText = `${onPercentage}%`;
+                const percentageTextX = Math.round((width - ctx.measureText(percentageText).width) / 2);
+                const percentageTextY = height / 2 - 10; // Slightly above center for better spacing
+                ctx.fillText(percentageText, percentageTextX, percentageTextY);
+
+                // Font and styling for "Working" text
+                const fontSizeLabel = (height / 200).toFixed(2); // Slightly smaller font size for label
+                ctx.font = `${fontSizeLabel}em sans-serif`;
+                const labelText = 'Working';
+                const labelTextX = Math.round((width - ctx.measureText(labelText).width) / 2);
+                const labelTextY = height / 1.9 + 15; // Slightly below center for better spacing
+                ctx.fillText(labelText, labelTextX, labelTextY);
+
+                ctx.save();
+            }
+        },
+    });
+
+    // Safeguard for null data
+    var firstChartData = {
+        labels: ['ON', 'OFF', 'UNK'],
+        datasets: [{
+            data: [@firstChartData?.ON ?? 0, @firstChartData?.OFF ?? 0, @firstChartData?.NC ?? 0],
+            backgroundColor: ['#8436a3', '#e08b2f', '#3e99de'],
+        }]
+    };
+
+    var secondChartData = {
+        labels: ['ON', 'OFF', 'NC'],
+        datasets: [{
+            data: [@secondChartData?.ON ?? 0, @secondChartData?.OFF ?? 0, @secondChartData?.NC ?? 0],
+            backgroundColor: ['#8436a3', '#e08b2f', '#3e99de'],
+        }]
+    };
+
+    // Generate Chart.js Doughnut Charts
+    var ctx1 = document.getElementById('firstChart').getContext('2d');
+    var ctx2 = document.getElementById('secondChart').getContext('2d');
+
+    var myDoughnutChart1 = new Chart(ctx1, {
+        type: 'doughnut',
+        data: firstChartData,
+        options: {
+            responsive: false,
+            maintainAspectRatio: false, // Allows manual width/height control
+            plugins: {
+                legend: { display: false },
+            },
+            // Remove border from datasets
+            elements: {
+                arc: {
+                    borderWidth: 0, // Remove arc border (for pie/doughnut charts)
+                },
+            },
+        },
+    });
+
+    var myDoughnutChart2 = new Chart(ctx2, {
+        type: 'doughnut',
+        data: secondChartData,
+        options: {
+            responsive: false,
+            maintainAspectRatio: false, // Allows manual width/height control
+            plugins: {
+                legend: { display: false },
+                centerTextPlugin: true, // Enable the custom plugin
+            },
+            elements: {
+                arc: { borderWidth: 0 }, // Remove arc border
+            },
+        },
+    });
+
+    // Custom Legend Rendering
+    const renderLegend = (chart, elementId) => {
+        const legendContainer = document.getElementById(elementId);
+        chart.data.labels.forEach((label, index) => {
+            const li = document.createElement('li');
+            li.innerHTML = `
+                        <span style="background-color: ${chart.data.datasets[0].backgroundColor[index]}; color: white; display: inline-block; width: 12px; height: 12px; margin-right: 8px;">
+                        </span> ${label} - ${chart.data.datasets[0].data[index]}
+                    `;
+            legendContainer.appendChild(li);
+        });
+    };
+
+    // Render Custom Legends for both charts
+    renderLegend(myDoughnutChart1, 'firstChartLegend');
+    renderLegend(myDoughnutChart2, 'secondChartLegend');
+</script>

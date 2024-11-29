@@ -1,0 +1,343 @@
+﻿@model CCMS.Models.ZoneWardViewModel
+
+<form method="post" class="mt-14 min-h-screen bg-gray-900 py-5 sm:py-10">
+    <div class="mx-auto w-full max-w-6xl space-y-8">
+        <!-- Header -->
+        <h1 class="px-2 text-2xl font-bold text-white sm:text-3xl">Zone and Ward Selection</h1>
+
+        <!-- Dropdowns Section -->
+        <div class="grid gap-6 md:grid-cols-3">
+            <!-- Zone Dropdown -->
+            <div class="relative">
+                <button id="zone" type="button"
+                        class="flex w-full items-center justify-between rounded-lg border border-gray-600 bg-gray-800 px-4 py-3 text-gray-300 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <span>Select Zone</span>
+                    <i class="fa-solid fa-caret-down"></i>
+                </button>
+                <div id="zone-options"
+                     class="z-10 absolute mt-2 hidden w-full rounded-md bg-gray-800 shadow-lg">
+                    <!-- Dynamically Inserted Options -->
+                </div>
+            </div>
+
+            <!-- Ward Dropdown -->
+            <div class="relative">
+                <button id="ward" type="button"
+                        class="flex w-full items-center justify-between rounded-lg border border-gray-600 bg-gray-800 px-4 py-3 text-gray-300 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <span>Select Ward</span>
+                    <i class="fa-solid fa-caret-down"></i>
+                </button>
+                <div id="ward-options"
+                     class="z-10 absolute mt-2 hidden max-h-60 w-full overflow-y-auto rounded-md bg-gray-800 shadow-lg">
+                    @foreach (var ward in Model.Wards)
+                    {
+                        <label class="flex items-center gap-2 px-3 py-2 hover:bg-gray-700">
+                            <input type="checkbox" value="@ward.Text" class="ward-checkbox h-4 w-4 rounded text-blue-600 focus:ring focus:ring-blue-400" />
+                            <span class="text-gray-300">Ward @ward.Text</span>
+                        </label>
+                    }
+                </div>
+            </div>
+
+            <!-- Status Dropdown -->
+            <div class="relative">
+                <button id="status" type="button"
+                        class="flex w-full items-center justify-between rounded-lg border border-gray-600 bg-gray-800 px-4 py-3 text-gray-300 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <span>Select Status</span>
+                    <i class="fa-solid fa-caret-down"></i>
+                </button>
+                <div id="status-options"
+                     class="z-10 absolute mt-2 hidden max-h-60 w-full overflow-y-auto rounded-md bg-gray-800 shadow-lg">
+                    <label class="flex items-center gap-2 px-3 py-2 hover:bg-gray-700">
+                        <input type="checkbox" value="1" class="status-checkbox h-4 w-4 rounded text-blue-600 focus:ring focus:ring-blue-400" />
+                        <span class="text-gray-300">ON</span>
+                    </label>
+                    <label class="flex items-center gap-2 px-3 py-2 hover:bg-gray-700">
+                        <input type="checkbox" value="2" class="status-checkbox h-4 w-4 rounded text-blue-600 focus:ring focus:ring-blue-400" />
+                        <span class="text-gray-300">OFF</span>
+                    </label>
+                    <label class="flex items-center gap-2 px-3 py-2 hover:bg-gray-700">
+                        <input type="checkbox" value="3" class="status-checkbox h-4 w-4 rounded text-blue-600 focus:ring focus:ring-blue-400" />
+                        <span class="text-gray-300">NC</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <!-- Devices Section -->
+        <div class="space-y-4">
+            @* <h1 class="px-2 text-2xl font-bold text-white">Devices</h1> *@
+            <div class="max-h-screen overflow-y-auto rounded-t-lg shadow-lg">
+                <table class="w-full table-auto table-fixed border border-gray-700 text-gray-300">
+                    <thead class="sticky -top-1 h-full w-full border border-gray-700 bg-gray-700">
+                        <!-- Added z-10 and ensured bg-gray-700 is present -->
+                        <tr class="h-full w-full border border-gray-700 text-center text-sm uppercase sm:text-left">
+                            <th class="w-1/3 px-4 py-3">Device No</th>
+                            <th class="w-1/3 px-4 py-3">Address</th>
+                            <th class="w-1/3 px-4 py-3">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="devices" class="divide-y divide-gray-700">
+                        <!-- Dynamically Populated Rows -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</form>
+
+@section Scripts
+{
+    <script>
+        // setTimeout(function () {
+        //     location.reload();
+        // }, 30000); // 30 seconds
+        function getCookieValue(cookieName) {
+            const cookies = document.cookie.split("; ");
+            for (let cookie of cookies) {
+                const [name, value] = cookie.split("=");
+                if (name === cookieName) {
+                    return value;
+                }
+            }
+            return null; // Return null if the cookie is not found
+        }
+
+        const token = getCookieValue("Token");
+        if (token) {
+            var selectedZones = [];
+            var selectedWards = [];
+            var selectedStatus = [];
+
+            var zones = [
+                { ZoneID: 1, ZoneName: "Zone 1" },
+                { ZoneID: 2, ZoneName: "Zone 2" },
+                { ZoneID: 3, ZoneName: "Zone 3" },
+                { ZoneID: 4, ZoneName: "Zone 4" },
+            ];
+
+            // Toggle zone dropdown visibility when clicked
+            $('#zone').click(function () {
+                $('#zone-options').toggle(); // Toggle visibility of zone options
+            });
+
+            // Toggle ward dropdown visibility when clicked
+            $('#ward').click(function () {
+                $('#ward-options').toggle(); // Toggle visibility of ward options
+            });
+
+            // Toggle ward dropdown visibility when clicked
+            $('#status').click(function () {
+                $('#status-options').toggle(); // Toggle visibility of ward options
+            });
+
+            // Populate the zone checkboxes
+            $(document).ready(function () {
+                fetchDeviceData();
+
+                async function fetchDeviceData() {
+                    try {
+                        console.log(token)
+                        // Example of fetching the initial data from an API when the page is rendered
+                        const response = await fetch("/Home/IMEIs", {
+                            responseType: 'blob', // Important to get the PDF as a binary file (blob)
+                            // headers: {
+                            //     Authorization: `Bearer ${token}`,
+                            // },
+                        }); // Your API endpoint
+                        if (!response.ok) {
+                            throw new Error("Failed to fetch initial data");
+                        }
+
+                        const data = await response.json();
+                        data.forEach(device => {
+                            $('#devices').append(
+                                `<tr class="cursor-pointer py-3 text-center text-white hover:text-gray-800 hover:bg-gray-50 sm:text-left" onclick="redirectToPage('${device.imeI_no}')">
+                                     <td class="px-4 py-2 text-sm">${device.imeI_no}</td>
+                                     <td class="px-4 py-2 text-sm">${device.location}</td>
+                                     <td class="px-4 py-2 text-sm">${device.status}</td>
+                                </tr>`
+                            );
+                        })
+                        // console.log("Fetched Initial Data: ", data);
+                    } catch (error) {
+                        console.error("Error fetching initial data:", error);
+                    }
+                }
+                // Populate Zones
+                $('#zone-options').empty(); // Clear any existing content
+                $.each(zones, function (index, zone) {
+                    // console.log(zone.ZoneID)
+                    $('#zone-options').append(
+                        `<label class="flex items-center gap-2 px-3 py-2 hover:bg-gray-700" >
+                             <input type="checkbox" class="zone-checkbox h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring focus:ring-blue-400" value="${zone.ZoneID}" />
+                             <span class="text-gray-50"> ${zone.ZoneName}</span>
+                        </label>`
+                    );
+                });
+            })
+
+            // Make the function asynchronous
+            const fetchWardsByZone = async (selectedZones) => {
+                try {
+                    // Perform the fetch request with selected zones
+                    const response = await fetch(`/Home/GetWardsByZone?zoneIds=${selectedZones}`, {
+                        // headers: {
+                        //     Authorization: `Bearer ${token}`,
+                        // },
+                    });
+
+                    // Check if the response is successful
+                    if (!response.ok) {
+                        throw new Error(`Failed to fetch wards: ${response.statusText}`);
+                    }
+
+                    // Parse the JSON response
+                    const data = await response.json();
+                    // console.log("AJAX success, data:", data); // Log the returned data
+
+                    // Populate new wards
+                    if (data.length === 0) {
+                        alert('No wards found for the selected zones.');
+                        return;
+                    }
+                    $('#ward-options').empty(); // Clear any existing content
+
+                    data.forEach((ward) => {
+                        $('#ward-options').append(
+                            `<label class="dropdown-item flex items-center gap-2 px-3 py-2 hover:bg-gray-700">
+                                <input type="checkbox" class="ward-checkbox h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring focus:ring-blue-400" value="${ward.ward}" />
+                                <span class="text-gray-300"> Ward ${ward.ward} </span>
+                            </label>`
+                        );
+                    });
+                } catch (error) {
+                    console.error('AJAX error:', error); // Log error details
+                    alert('Failed to fetch wards.');
+                }
+            };
+
+            const filterDeveices = async (selectedZones, selectedWards, selectedStatus) => {
+                console.log(selectedZones, selectedWards, selectedStatus)
+                try {
+                    // Perform the fetch request with selected zones
+                    const response = await fetch(`/Home/filterDeveices`, {
+                        method: 'POST', // Use POST method to send data in the body
+                        headers: {
+                            'Content-Type': 'application/json', // Specify content type as JSON
+                            // Authorization: `Bearer ${token}`, // Ensure token is included if required
+                        },
+                        body: JSON.stringify({
+                            zones: selectedZones, // Send selectedZones as part of the body
+                            wards: selectedWards, // Send selectedWards as part of the body
+                            status: selectedStatus, // Send selectedWards as part of the body
+                        }),
+                    });
+
+                    // Check if the response is successful
+                    if (!response.ok) {
+                        throw new Error(`Failed to fetch wards: ${response.statusText}`);
+                    }
+
+                    // Parse the JSON response
+                    const data = await response.json();
+                    console.log("AJAX success, devices:", data); // Log the returned data
+
+                    // Populate new wards
+                    // if (data.length === 0) {
+                    //     alert('No wards found for the selected zones.');
+                    //     return;
+                    // }
+
+                    $('#devices').empty(); // Clear any existing content
+                    data.forEach(device => {
+                        $('#devices').append(
+                            `<tr class="cursor-pointer border-t py-3 text-center text-white hover:text-gray-800 hover:bg-gray-50 sm:text-left" onclick="redirectToPage('${device.imeI_no}')">
+                                                      <td class="px-4 py-2 text-sm">${device.imeI_no}</td>
+                                                      <td class="px-4 py-2 text-sm">${device.location}</td>
+                                                      <td class="px-4 py-2 text-sm">${device.status}</td>
+                                                </tr>`
+                        );
+                    })
+                } catch (error) {
+                    console.error('AJAX error:', error); // Log error details
+                    alert('Failed to fetch wards.');
+                }
+            }
+
+            $(document).on('change', '.zone-checkbox', function () {
+                selectedZones = [];
+                $('.zone-checkbox:checked').each(function () {
+                    selectedZones.push($(this).val());
+                });
+
+                $('.ward-checkbox:checked').each(function () {
+                    selectedWards.push($(this).val());
+                });
+
+                console.log("Selected Zones:", selectedZones);
+                console.log("Selected Wards:", selectedWards);
+
+                // Call the async function
+                fetchWardsByZone(selectedZones);
+                filterDeveices(selectedZones, selectedWards, selectedStatus)
+            });
+
+            // Event listener for Ward Checkbox changes
+            $(document).on('change', '.ward-checkbox', function () {
+                // Clear selectedWards and repopulate it based on the selected checkboxes
+                selectedWards = [];
+                $('.ward-checkbox:checked').each(function () {
+                    selectedWards.push($(this).val());
+                });
+
+                console.log("Selected Wards:", selectedWards);
+
+                // Call function to filter devices based on selected zones and wards
+                filterDeveices(selectedZones, selectedWards, selectedStatus);
+            });
+
+            // Event listener for status Checkbox changes
+            $(document).on('change', '.status-checkbox', function () {
+                // Clear selectedWards and repopulate it based on the selected checkboxes
+                selectedStatus = [];
+                $('.status-checkbox:checked').each(function () {
+                    selectedStatus.push($(this).val());
+                });
+
+                console.log("Selected status:", selectedStatus);
+
+                // Call function to filter devices based on selected zones and wards
+                filterDeveices(selectedZones, selectedWards, selectedStatus);
+            });
+
+            function redirectToPage(IMEI) {
+                try {
+                    console.log("token with IMEI:", token);
+                    console.log("Redirecting with IMEI:", IMEI);
+
+                    const url = `/Home/DeviceData?IMEI=${IMEI}`;
+
+                    window.location.href = url;
+                } catch (err) {
+                    console.log(err)
+                }
+            }
+
+            $(document).on('click', function (e) {
+                if (!$(e.target).closest('#zone, #zone-options').length) {
+                    $('#zone-options').hide();
+                }
+                if (!$(e.target).closest('#ward, #ward-options').length) {
+                    $('#ward-options').hide();
+                }
+                if (!$(e.target).closest('#status, #status-options').length) {
+                    $('#status-options').hide();
+                }
+            });
+
+        } else {
+            window.location.href = '/auth/login';
+        }
+    </script>
+}
