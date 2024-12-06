@@ -1,4 +1,13 @@
-﻿// Please see documentation at https://learn.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
+﻿document.addEventListener("DOMContentLoaded", () => {
+    const toggleNavbarButton = document.getElementById("toggleNavbar");
+    const sidebar = document.getElementById("sidebar");
+    const closeSidebarButton = document.getElementById("closeSidebar");
 
-// Write your JavaScript code.
+    toggleNavbarButton?.addEventListener("click", () => {
+        sidebar?.classList.toggle("-translate-x-full");
+    });
+
+    closeSidebarButton?.addEventListener("click", () => {
+        sidebar?.classList.add("-translate-x-full");
+    });
+});

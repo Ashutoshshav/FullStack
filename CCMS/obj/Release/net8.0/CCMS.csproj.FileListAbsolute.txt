@@ -174,3 +174,5 @@ C:\Users\busin\Downloads\CCMS (1)\CCMS\CCMS\obj\Release\net8.0\refint\CCMS.dll
 C:\Users\busin\Downloads\CCMS (1)\CCMS\CCMS\obj\Release\net8.0\CCMS.pdb
 C:\Users\busin\Downloads\CCMS (1)\CCMS\CCMS\obj\Release\net8.0\CCMS.genruntimeconfig.cache
 C:\Users\busin\Downloads\CCMS (1)\CCMS\CCMS\obj\Release\net8.0\ref\CCMS.dll
+C:\Users\busin\Downloads\CCMS (1)\CCMS\CCMS\bin\Release\net8.0\tailwind.extension.json
+C:\Users\busin\Downloads\CCMS (1)\CCMS\CCMS\bin\Release\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll

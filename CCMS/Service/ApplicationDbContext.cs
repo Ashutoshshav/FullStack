@@ -19,5 +19,7 @@ namespace CCMS.Service
         public DbSet<ChartModel> ChartModel { get; set; }
         public DbSet<ChartViewModel> ChartViewModel { get; set; }
         public DbSet<Login_Master> Login_Master { get; set; }
+        public DbSet<Network> Network { get; set; }
+        public DbSet<NetworkSts> NetworkSts { get; set; }
     }
 }

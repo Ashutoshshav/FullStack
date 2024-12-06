@@ -2,12 +2,14 @@ C:\Users\busin\Downloads\CCMS (1)\CCMS\CCMS\obj\Release\net8.0\PubTmp\Out\CCMS.e
 C:\Users\busin\Downloads\CCMS (1)\CCMS\CCMS\obj\Release\net8.0\PubTmp\Out\appsettings.Development.json
 C:\Users\busin\Downloads\CCMS (1)\CCMS\CCMS\obj\Release\net8.0\PubTmp\Out\appsettings.json
 C:\Users\busin\Downloads\CCMS (1)\CCMS\CCMS\obj\Release\net8.0\PubTmp\Out\libman.json
+C:\Users\busin\Downloads\CCMS (1)\CCMS\CCMS\obj\Release\net8.0\PubTmp\Out\tailwind.extension.json
 C:\Users\busin\Downloads\CCMS (1)\CCMS\CCMS\obj\Release\net8.0\PubTmp\Out\CCMS.dll
 C:\Users\busin\Downloads\CCMS (1)\CCMS\CCMS\obj\Release\net8.0\PubTmp\Out\CCMS.runtimeconfig.json
 C:\Users\busin\Downloads\CCMS (1)\CCMS\CCMS\obj\Release\net8.0\PubTmp\Out\CCMS.pdb
 C:\Users\busin\Downloads\CCMS (1)\CCMS\CCMS\obj\Release\net8.0\PubTmp\Out\Azure.Core.dll
 C:\Users\busin\Downloads\CCMS (1)\CCMS\CCMS\obj\Release\net8.0\PubTmp\Out\Azure.Identity.dll
 C:\Users\busin\Downloads\CCMS (1)\CCMS\CCMS\obj\Release\net8.0\PubTmp\Out\Dapper.dll
+C:\Users\busin\Downloads\CCMS (1)\CCMS\CCMS\obj\Release\net8.0\PubTmp\Out\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 C:\Users\busin\Downloads\CCMS (1)\CCMS\CCMS\obj\Release\net8.0\PubTmp\Out\Microsoft.AspNetCore.SpaServices.Extensions.dll
 C:\Users\busin\Downloads\CCMS (1)\CCMS\CCMS\obj\Release\net8.0\PubTmp\Out\Microsoft.Bcl.AsyncInterfaces.dll
 C:\Users\busin\Downloads\CCMS (1)\CCMS\CCMS\obj\Release\net8.0\PubTmp\Out\Microsoft.Data.SqlClient.dll

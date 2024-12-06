@@ -4,8 +4,8 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
 -->
 <Project>
   <PropertyGroup>
-    <_PublishTargetUrl>C:\MCG</_PublishTargetUrl>
-    <History>True|2024-11-18T14:23:05.1127889Z||;True|2024-11-18T19:49:06.5470719+05:30||;True|2024-11-18T19:46:22.6961579+05:30||;</History>
+    <_PublishTargetUrl>C:\MCG_WEB_HOST</_PublishTargetUrl>
+    <History>True|2024-12-03T12:28:29.0187339Z||;True|2024-12-03T17:33:27.5869358+05:30||;</History>
     <LastFailureDetails />
   </PropertyGroup>
 </Project>

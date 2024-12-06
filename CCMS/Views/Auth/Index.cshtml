@@ -60,7 +60,7 @@
                 const data = await response.json();
                 if (data.token) {
                     console.log(data.token)
-                    window.location.href = '/home/index';  // You can adjust this URL to your landing page
+                    window.location.href = '/Chart/index';  // You can adjust this URL to your landing page
                 } else {
                     console.log(data.message)
                     let errorMessage = document.getElementById('error-message')

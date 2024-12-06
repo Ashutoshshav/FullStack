@@ -1,118 +1,155 @@
 ﻿@model CCMS.CustomModel.DataModel
 
-<div class="flex min-h-screen w-full items-center justify-center bg-gray-900 bg-gradient-to-br p-4 sm:mt-8 sm:p-8">
-    <div class="mt-16 flex w-full flex-col justify-center rounded-lg border border-gray-600 bg-gray-800 p-6 text-gray-50 shadow-2xl sm:mt-0">
-        <!-- Header Section -->
-        <div class="mb-8 text-center">
-            <p class="text-2xl font-semibold tracking-wide sm:text-3xl">@Model.visLive_s.IMEI_no</p>
-        </div>
-
-        <!-- Buttons Section -->
-        <div class="grid-cols-2 mb-8 grid gap-4 sm:grid-cols-3">
-            <button class="transform rounded-lg bg-blue-600 px-4 py-2 font-semibold text-white shadow-lg transition-transform hover:bg-blue-700">
-                LIVE REPORT
-            </button>
-            <button class="transform rounded-lg bg-blue-600 px-4 py-2 font-semibold text-white shadow-lg transition-transform hover:bg-blue-700">
-                DAY REPORT
-            </button>
-            <button class="transform rounded-lg bg-blue-600 px-4 py-2 font-semibold text-white shadow-lg transition-transform hover:bg-blue-700">
-                UPDATE LIVE
-            </button>
-            <button class="transform rounded-lg bg-red-500 px-4 py-2 font-semibold text-white shadow-lg transition-transform hover:bg-red-600">
-                MCB RESET
-            </button>
-            <button id="btn-on" class="transform rounded-lg bg-red-500 px-4 py-2 font-semibold text-white shadow-lg transition-transform hover:bg-red-600" onclick="updateStatus('1', '@Model.visLive_s.IMEI_no')">
-                ON
-            </button>
-            <button id="btn-off" class="transform rounded-lg bg-red-500 px-4 py-2 font-semibold text-white shadow-lg transition-transform hover:bg-red-600" onclick="updateStatus('2', '@Model.visLive_s.IMEI_no')">
-                OFF
-            </button>
+<div class="mt-16 flex w-full flex-col items-center justify-center md:mt-12 lg:mt-20">
+    <!-- Location Header -->
+    <div class="w-full">
+        <div class="mt-2 flex w-full flex-col items-center justify-between bg-blue-100 px-4 py-3 shadow-md sm:flex-row lg:mt-0">
+            <div class="flex items-center space-x-4">
+                <div class="flex" id="statusImg">
+                    <img class="w-12" src="/images/wifigreenR.png" alt="wifi image" />
+                    <img class="w-12" src="/images/wifiNR.png" alt="wifi image" />
+                </div>
+                <p class="text-lg font-semibold text-gray-800">@Model.IMEI_Master_s.Location</p>
+            </div>
+            <div class="mt-2 text-center sm:mt-0">
+                <p class="text-lg font-normal text-gray-800">
+                    Last Update: <span class="font-semibold text-gray-900">@Model.visLive_s.DTIME_SYS</span>
+                </p>
+            </div>
         </div>
 
         <!-- Information Section -->
-        <div class="grid-cols-1 mb-10 grid gap-6 text-sm font-semibold sm:grid-cols-2 sm:text-base md:grid-cols-3 lg:grid-cols-4">
-            <div class="flex justify-between border-b border-gray-300 pb-2 text-gray-200">
-                <span class="">ZONE</span>
-                <span class="font-medium">@Model.IMEI_Master_s.Zone</span>
+        <div class="my-4 grid gap-4 px-4 md:grid-cols-2 lg:grid-cols-3">
+            <div class="flex rounded-lg border bg-white p-3 shadow-sm">
+                <p style="width:40%;" class="text-lg text-gray-700">Zone:</p>
+                <p style="width:60%;" class="text-xl font-semibold text-gray-900">@Model.IMEI_Master_s.Zone</p>
             </div>
-            <div class="flex justify-between border-b border-gray-300 pb-2">
-                <span class="text-gray-50">WARD NUMBER</span>
-                <span class="font-medium text-gray-50">@Model.IMEI_Master_s.Ward</span>
+            <div class="flex rounded-lg border bg-white p-3 shadow-sm">
+                <p style="width:40%;" class="text-lg text-gray-700">Ward:</p>
+                <p style="width:60%;" class="text-xl font-semibold text-gray-900">@Model.IMEI_Master_s.Ward</p>
             </div>
-            <div class="flex justify-between border-b border-gray-300 pb-2">
-                <span class="text-gray-50">LOCATION</span>
-                <span class="font-medium text-gray-50">@Model.IMEI_Master_s.Location</span>
+            <div class="flex rounded-lg border bg-white p-3 shadow-sm">
+                <p style="width:40%;" class="text-lg text-gray-700">LAT LONG:</p>
+                <p style="width:60%;" class="text-xl font-semibold text-gray-900">@Model.IMEI_Master_s.Ward</p>
             </div>
-            <div class="flex justify-between border-b border-gray-300 pb-2">
-                <span class="text-gray-50">SIM NO</span>
-                <span class="font-medium text-gray-50">5755183037858</span>
+            <div class="flex rounded-lg border bg-white p-3 shadow-sm">
+                <p style="width:40%;" class="text-lg text-gray-700">SIM NO:</p>
+                <p style="width:60%;" class="text-xl font-semibold text-gray-900">@Model.IMEI_Master_s.Ward</p>
             </div>
-            <div class="flex justify-between border-b border-gray-300 pb-2">
-                <span class="text-gray-50">IMEI NO</span>
-                <span class="font-medium text-gray-50">@Model.visLive_s.IMEI_no</span>
+            <div class="flex rounded-lg border bg-white p-3 shadow-sm">
+                <p style="width:40%;" class="text-lg text-gray-700">IMEI NO:</p>
+                <p style="width:60%;" class="text-xl font-semibold text-gray-900">@Model.IMEI_Master_s.IMEI_no</p>
             </div>
-            <div class="flex justify-between border-b border-gray-300 pb-2">
-                <span class="text-gray-50">SC NO</span>
-                <span class="font-medium text-gray-50">106-78</span>
+            @* <div class="flex rounded-lg border bg-white p-3 shadow-sm">
+                <p style="width:49%;" class="text-lg text-gray-700">SC NO:</p>
+                <p style="width:49%;" class="text-xl font-semibold text-gray-900">@Model.IMEI_Master_s.Ward</p>
+            </div> *@
+            <div class="flex rounded-lg border bg-white p-3 shadow-sm">
+                <p style="width:40%;" class="text-lg text-gray-700">PHASE:</p>
+                <p style="width:60%;" class="text-xl font-semibold text-gray-900">1</p>
             </div>
-            <div class="flex justify-between border-b border-gray-300 pb-2">
-                <span class="text-gray-50">PHASE</span>
-                <span class="font-medium text-gray-50">1</span>
-            </div>
-            <div class="flex justify-between border-b border-gray-300 pb-2">
-                <span class="text-gray-50">LAT LONG</span>
-                <span class="font-medium text-gray-50">28.47194, 77.01211</span>
+            @* <div class="max-w-24 rounded-lg border bg-white p-3 shadow-sm">
+                <p class="text-lg text-gray-700">Power: <span class="text-xl font-semibold text-gray-900">@Model.visLive_s.P3</span></p>
+            </div> *@
+        </div>
+    </div>
+
+    <!-- Live Status -->
+    <div class="w-full">
+        <div class="flex w-full flex-col items-center justify-between bg-blue-100 px-4 py-3 shadow-md sm:flex-row">
+            <div class="flex items-center space-x-4">
+                <p class="text-lg font-semibold text-gray-800">Live Status</p>
             </div>
         </div>
-
-        <!-- Last Live Updates Section -->
-        <div class="mb-8 rounded-lg bg-gray-700 py-3 text-center font-bold text-white shadow-md">
-            LAST LIVE UPDATES
+        <div class="my-4 grid gap-4 px-4 md:grid-cols-2 lg:grid-cols-3">
+            <div class="flex rounded-lg border bg-white p-3 shadow-sm">
+                <p style="width:40%;" class="text-lg text-gray-700">Voltage:</p>
+                <p style="width:60%;" class="text-xl font-semibold text-gray-900">@Model.visLive_s.P1</p>
+            </div>
+            <div class="flex rounded-lg border bg-white p-3 shadow-sm">
+                <p style="width:40%;" class="text-lg text-gray-700">Current: </p>
+                <p style="width:60%;" class="text-xl font-semibold text-gray-900">@Model.visLive_s.P2</p>
+            </div>
+            <div class="flex rounded-lg border bg-white p-3 shadow-sm">
+                <p style="width:40%;" class="text-lg text-gray-700">Power: </p>
+                <p style="width:60%;" class="text-xl font-semibold text-gray-900">@Model.visLive_s.P3</p>
+            </div>
+            <div class="flex rounded-lg border bg-white p-3 shadow-sm">
+                <p style="width:40%;" class="text-lg text-gray-700">Mode: </p>
+                <p style="width:60%;" class="text-xl font-semibold text-gray-900">@Model.visLive_s.P4</p>
+            </div>
+            <div class="flex rounded-lg border bg-white p-3 shadow-sm">
+                <p style="width:40%;" class="text-lg text-gray-700">Error Status: </p>
+                <p style="width:60%;" class="text-xl font-semibold text-gray-900">@Model.visLive_s.P5</p>
+            </div>
+            <div class="flex rounded-lg border bg-white p-3 shadow-sm">
+                <p style="width:40%;" class="text-lg text-gray-700">Relay Status: </p>
+                <p style="width:60%;" class="text-xl font-semibold text-gray-900">@Model.visLive_s.P6</p>
+            </div>
+            <div class="flex rounded-lg border bg-white p-3 shadow-sm">
+                <p style="width:40%;" class="text-lg text-gray-700">Date Time: </p>
+                <p style="width:60%;" class="text-xl font-semibold text-gray-900">@Model.visLive_s.DTIME_SYS</p>
+            </div>
+            <div class="flex rounded-lg border bg-white p-3 shadow-sm">
+                <p style="width:40%;" class="text-lg text-gray-700">On Time: </p>
+                <p style="width:60%;" class="text-xl font-semibold text-gray-900">@Model.visLive_s.DTIME_SYS</p>
+            </div>
+            <div class="flex rounded-lg border bg-white p-3 shadow-sm">
+                <p style="width:40%;" class="text-lg text-gray-700">Units: </p>
+                <p style="width:60%;" class="text-xl font-semibold text-gray-900">@Model.visLive_s.P7</p>
+            </div>
         </div>
+    </div>
 
-        <!-- Live Updates -->
-        <div class="grid-cols-1 grid gap-6 text-sm sm:grid-cols-2 sm:text-base md:grid-cols-3 lg:grid-cols-4">
-            <div class="flex justify-between border-b border-gray-300 pb-2">
-                <span class="text-gray-50">TIME</span>
-                <span class="font-medium text-gray-50">@Model.visLive_s.DTIME_SYS</span>
+    <!-- Control Section -->
+    <div class="w-full">
+        <div class="flex w-full flex-col items-center justify-between bg-blue-100 px-4 py-3 shadow-md sm:flex-row">
+            <div class="flex items-center space-x-4">
+                <p class="text-lg font-semibold text-gray-800">Control</p>
             </div>
-            <div class="flex justify-between border-b border-gray-300 pb-2">
-                <span class="text-gray-50">VOLTAGE</span>
-                <span class="font-medium text-gray-50">@Model.visLive_s.P1</span>
+        </div>
+        <div class="my-4 grid w-full items-center justify-center gap-4 px-4 sm:grid-cols-2 lg:flex lg:justify-center lg:space-x-6">
+            <button class="border-2 w-full max-w-xs rounded-full border-purple-200 px-36 py-2 text-black shadow-sm hover:shadow-lg hover:bg-purple-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-purple-300" onclick="updateStatus('9991', '1' ,'@Model.visLive_s.IMEI_no')" id="btn-on">
+                ON
+            </button>
+            <button class="border-2 w-full max-w-xs rounded-full border-purple-200 px-6 py-2 text-black shadow-sm hover:shadow-lg hover:bg-purple-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-purple-300" onclick="updateStatus('9992', '2', '@Model.visLive_s.IMEI_no')" id="btn-off">
+                OFF
+            </button>
+            <button class="border-2 w-full max-w-xs rounded-full border-purple-200 px-6 py-2 text-black shadow-sm hover:shadow-lg hover:bg-purple-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-purple-300" onclick="updateStatus('9993', '2', '@Model.visLive_s.IMEI_no')" id="btn-off">
+                RESET
+            </button>
+            <button class="border-2 w-full max-w-xs rounded-full border-purple-200 px-6 py-2 text-black shadow-sm hover:shadow-lg hover:bg-purple-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-purple-300">
+                UPDATE
+            </button>
+        </div>
+    </div>
+
+    <!-- Report Section -->
+    <div class="w-full">
+        <div class="flex w-full flex-col items-center justify-between bg-blue-100 px-4 py-3 shadow-md sm:flex-row">
+            <div class="flex items-center space-x-4">
+                <p class="text-lg font-semibold text-gray-800">Report</p>
             </div>
-            <div class="flex justify-between border-b border-gray-300 pb-2">
-                <span class="text-gray-50">CURRENT</span>
-                <span class="font-medium text-gray-50">@Model.visLive_s.P2</span>
-            </div>
-            <div class="flex justify-between border-b border-gray-300 pb-2">
-                <span class="text-gray-50">KW</span>
-                <span class="font-medium text-gray-50">@Model.visLive_s.P3</span>
-            </div>
-            <div class="flex justify-between border-b border-gray-300 pb-2">
-                <span class="text-gray-50">ERROR</span>
-                <span class="font-medium text-gray-50">@Model.visLive_s.P4</span>
-            </div>
-            <div class="flex justify-between border-b border-gray-300 pb-2">
-                <span class="text-gray-50">MODE</span>
-                <span class="font-medium text-gray-50">@Model.visLive_s.P5</span>
-            </div>
-            <div class="flex justify-between border-b border-gray-300 pb-2">
-                <span class="text-gray-50">RELAY</span>
-                <span class="font-medium text-gray-50">@Model.visLive_s.P6</span>
-            </div>
-            <div class="flex justify-between border-b border-gray-300 pb-2">
-                <span class="text-gray-50">ON TIME</span>
-                <span class="font-medium text-gray-50">@Model.visLive_s.P7</span>
-            </div>
-            <div class="flex justify-between border-b border-gray-300 pb-2">
-                <span class="text-gray-50">UNITS</span>
-                <span class="font-medium text-gray-50">@Model.visLive_s.P8</span>
-            </div>
+        </div>
+        <div class="my-4 grid w-full items-center justify-center gap-4 px-4 sm:grid-cols-2 lg:flex lg:justify-center lg:space-x-6">
+            <button class="border-2 w-full max-w-xs rounded-full border-purple-200 px-28 py-2 text-black shadow-sm hover:shadow-lg hover:bg-purple-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-purple-300">
+                Live Report
+            </button>
+            <button class="border-2 w-full max-w-xs rounded-full border-purple-200 px-6 py-2 text-black shadow-sm hover:shadow-lg hover:bg-purple-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-purple-300">
+                Daily Report
+            </button>
+            <button class="border-2 w-full max-w-xs rounded-full border-purple-200 px-6 py-2 text-black shadow-sm hover:shadow-lg hover:bg-purple-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-purple-300">
+                Print/Excel/PDF
+            </button>
         </div>
     </div>
 </div>
 
 <script>
+    setInterval(function () {
+        location.reload(); // This reloads the current page
+    }, 30000); // 30 seconds
+
     function getCookieValue(cookieName) {
         const cookies = document.cookie.split("; ");
         for (let cookie of cookies) {
@@ -128,49 +165,76 @@
     if (token) {
         const btnOn = document.getElementById('btn-on');
         const btnOff = document.getElementById('btn-off');
+
+        const statusImg = document.getElementById('statusImg');
         $(document).ready(function () {
             if (@Model.IMEI_Master_s.Status == 1) {
+                $('#statusImg').empty();
+
+                $('#statusImg').append(
+                    `<img class="w-12" src="/images/wifigreenR.png" alt="wifi image" />`
+                );
+            } else {
+                $('#statusImg').empty();
+
+                $('#statusImg').append(
+                    `<img class="w-12" src="/images/wifiNR.png" alt="wifi image" />`
+                );
+            }
+            if (@Model.IMEI_Master_s.Response == 9991) {
+
                 btnOn.disabled = true;
-                btnOn.classList.add('bg-gray-500');
-                btnOn.classList.remove('bg-red-500', 'hover:bg-red-600');
+                btnOn.classList.add('bg-green-300');
+                btnOn.classList.remove('bg-purple-200', 'hover:bg-purple-400');
 
                 btnOff.disabled = false;
-                btnOff.classList.add('bg-red-500', 'hover:bg-red-600');
-                btnOff.classList.remove('bg-gray-500');
-            } else if (@Model.IMEI_Master_s.Status == 2) {
+                btnOff.classList.add('hover:bg-purple-400');
+                btnOff.classList.remove('bg-red-300');
+            } else if (@Model.IMEI_Master_s.Response == 9992) {
+                $('#statusImg').empty();
+
+                $('#statusImg').append(
+                    `<img class="w-12" src="/images/wifiNR.png" alt="wifi image" />`
+                );
+
                 btnOff.disabled = true;
-                btnOff.classList.add('bg-gray-500');
-                btnOff.classList.remove('bg-red-500', 'hover:bg-red-600');
+                btnOff.classList.add('bg-red-300');
+                btnOff.classList.remove('bg-purple-200', 'hover:bg-purple-400');
 
                 btnOn.disabled = false;
-                btnOn.classList.add('bg-red-500', 'hover:bg-red-600');
-                btnOn.classList.remove('bg-gray-500');
+                btnOn.classList.add('hover:bg-purple-400');
+                btnOn.classList.remove('bg-green-300');
             } else {
-                btnOn.disabled = true;
-                btnOn.classList.add('bg-gray-500');
-                btnOn.classList.remove('bg-red-500', 'hover:bg-red-600');
+                $('#statusImg').empty();
 
-                btnOff.disabled = true;
-                btnOff.classList.add('bg-gray-500');
-                btnOff.classList.remove('bg-red-500', 'hover:bg-red-600');
+                $('#statusImg').append(
+                    `<p class="text-lg font-semibold text-red-600">NC</p>`
+                );
+                // btnOn.disabled = true;
+                // btnOn.classList.add('bg-gray-300');
+                // btnOn.classList.remove('bg-purple-200', 'hover:bg-purple-400');
+
+                // btnOff.disabled = true;
+                // btnOff.classList.add('bg-gray-300');
+                // btnOff.classList.remove('bg-purple-200', 'hover:bg-purple-400');
             }
         })
 
-        var updateStatus = async (status, IMEI_no) => {
+        var updateStatus = async (responseSts, status, IMEI_no) => {
             try {
-                console.log(status, IMEI_no)
-                console.log(token)
+                // console.log(token)
                 const response = await fetch(`/Home/UpdateIMEIStatus`, {
                     method: 'POST', // Use POST method to send data in the body
                     headers: {
-                        'Content-Type': 'application/json', // Specify content type as JSON
-                        // Authorization: `Bearer ${token}`,
+                        'Content-Type': 'application/json',
                     },
                     body: JSON.stringify({
                         IMEI_no: IMEI_no,
                         Status: status,
+                        ResponseSts: responseSts,
                     }),
                 });
+                console.log(status, IMEI_no, responseSts)
 
                 // Check if the response is successful
                 if (!response.ok) {
@@ -180,33 +244,32 @@
                 // Parse the JSON response
                 const data = await response.json();
                 if (data.success) {
-                    console.log("status:", data.data.status)
+                    console.log("status:", data.data.response)
 
-
-                    if (data.data.status == 1) {
+                    if (data.data.response == 9991) {
                         btnOn.disabled = true;
-                        btnOn.classList.add('bg-gray-500');
-                        btnOn.classList.remove('bg-red-500', 'hover:bg-red-600');
+                        btnOn.classList.add('bg-green-300');
+                        btnOn.classList.remove('bg-purple-200', 'hover:bg-purple-400');
 
                         btnOff.disabled = false;
-                        btnOff.classList.add('bg-red-500', 'hover:bg-red-600');
-                        btnOff.classList.remove('bg-gray-500');
-                    } else if (data.data.status == 2) {
+                        btnOff.classList.add('hover:bg-purple-400');
+                        btnOff.classList.remove('bg-red-300');
+                    } else if (data.data.response == 9992) {
                         btnOff.disabled = true;
-                        btnOff.classList.add('bg-gray-500');
-                        btnOff.classList.remove('bg-red-500', 'hover:bg-red-600');
+                        btnOff.classList.add('bg-red-300');
+                        btnOff.classList.remove('bg-purple-200', 'hover:bg-purple-400');
 
                         btnOn.disabled = false;
-                        btnOn.classList.add('bg-red-500', 'hover:bg-red-600');
-                        btnOn.classList.remove('bg-gray-500');
+                        btnOn.classList.add('hover:bg-purple-400');
+                        btnOn.classList.remove('bg-green-300');
                     } else {
                         btnOn.disabled = true;
-                        btnOn.classList.add('bg-gray-500');
-                        btnOn.classList.remove('bg-red-500', 'hover:bg-red-600');
+                        btnOn.classList.add('bg-gray-300');
+                        btnOn.classList.remove('bg-purple-200', 'hover:bg-purple-400');
 
                         btnOff.disabled = true;
-                        btnOff.classList.add('bg-gray-500');
-                        btnOff.classList.remove('bg-red-500', 'hover:bg-red-600');
+                        btnOff.classList.add('bg-gray-300');
+                        btnOff.classList.remove('bg-purple-200', 'hover:bg-purple-400');
                     }
                 } else {
                     alert(data.message)
@@ -218,4 +281,5 @@
     } else {
         window.location.href = '/auth/login';
     }
+
 </script>

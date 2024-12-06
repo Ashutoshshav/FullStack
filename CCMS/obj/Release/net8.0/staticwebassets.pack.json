@@ -189,6 +189,38 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "C:\\Users\\busin\\Downloads\\CCMS (1)\\CCMS\\CCMS\\wwwroot\\images\\Logo5.png",
+      "PackagePath": "staticwebassets\\images\\Logo5.png"
+    },
+    {
+      "Id": "C:\\Users\\busin\\Downloads\\CCMS (1)\\CCMS\\CCMS\\wwwroot\\images\\MCG logo.png",
+      "PackagePath": "staticwebassets\\images\\MCG logo.png"
+    },
+    {
+      "Id": "C:\\Users\\busin\\Downloads\\CCMS (1)\\CCMS\\CCMS\\wwwroot\\images\\MCGlogo.png",
+      "PackagePath": "staticwebassets\\images\\MCGlogo.png"
+    },
+    {
+      "Id": "C:\\Users\\busin\\Downloads\\CCMS (1)\\CCMS\\CCMS\\wwwroot\\images\\wifiN.jpeg",
+      "PackagePath": "staticwebassets\\images\\wifiN.jpeg"
+    },
+    {
+      "Id": "C:\\Users\\busin\\Downloads\\CCMS (1)\\CCMS\\CCMS\\wwwroot\\images\\wifiNR.png",
+      "PackagePath": "staticwebassets\\images\\wifiNR.png"
+    },
+    {
+      "Id": "C:\\Users\\busin\\Downloads\\CCMS (1)\\CCMS\\CCMS\\wwwroot\\images\\wifigreen.png",
+      "PackagePath": "staticwebassets\\images\\wifigreen.png"
+    },
+    {
+      "Id": "C:\\Users\\busin\\Downloads\\CCMS (1)\\CCMS\\CCMS\\wwwroot\\images\\wifigreenR.png",
+      "PackagePath": "staticwebassets\\images\\wifigreenR.png"
+    },
+    {
+      "Id": "C:\\Users\\busin\\Downloads\\CCMS (1)\\CCMS\\CCMS\\wwwroot\\js\\site - Copy.js",
+      "PackagePath": "staticwebassets\\js\\site - Copy.js"
+    },
+    {
       "Id": "C:\\Users\\busin\\Downloads\\CCMS (1)\\CCMS\\CCMS\\wwwroot\\js\\site.js",
       "PackagePath": "staticwebassets\\js\\site.js"
     },
