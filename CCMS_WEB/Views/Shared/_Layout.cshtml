@@ -1,0 +1,58 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - CCMS_WEB</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    @* <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" /> *@
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/CCMS_WEB.styles.css" asp-append-version="true" />
+</head>
+<body>
+    <nav class="flex items-center justify-between bg-gray-800 px-8 py-4 text-white shadow-md">
+        <!-- Left Section: Logo -->
+        <div class="flex items-center space-x-4">
+            @* <img src="logo.png" alt="Smart Logo" class="h-8" /> *@
+            <span class="text-xl font-bold tracking-wide">CCMS</span>
+        </div>
+
+        <!-- Center Section: Menu Links -->
+        <ul class="flex items-center space-x-6 text-sm font-medium">
+            <li class="border-b-2 cursor-pointer border-cyan-400 pb-1 text-cyan-400">HOME</li>
+            <li class="cursor-pointer hover:text-cyan-400">LIVEVIEW</li>
+            <li class="cursor-pointer hover:text-cyan-400">REPORTS</li>
+            <li class="cursor-pointer hover:text-cyan-400">CONFIG</li>
+            <li class="cursor-pointer hover:text-cyan-400">SETTINGS</li>
+            <li class="cursor-pointer hover:text-cyan-400">MMS</li>
+            <li class="cursor-pointer hover:text-cyan-400">TICKETS</li>
+        </ul>
+
+        <!-- Right Section: User and Sign-Out -->
+        <div class="flex items-center space-x-6">
+            <span class="font-semibold text-green-400">GUGUEST</span>
+            <button class="cursor-pointer hover:text-cyan-400">SIGN OUT</button>
+            <div class="flex items-center space-x-2">
+                @* <img src="schnell-logo.png" alt="Schnell Logo" class="h-6" /> *@
+                <span class="font-semibold text-white">Schnell</span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="w-full bg-gray-100">
+        <main role="main" class="px-52 pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    @* <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2024 - CCMS_WEB - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer> *@
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    @* <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script> *@
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

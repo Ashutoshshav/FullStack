@@ -1,0 +1,159 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="p-4 space-y-4 flex flex-col">
+    <!-- Filters Section -->
+    <div class="gap-6 grid md:grid-cols-4">
+        <select class="border-gray-300 px-4 py-2 rounded border">
+            <option>GURUGRAM</option>
+        </select>
+        <!-- Zone Dropdown -->
+        <div class="relative">
+            <button id="zone" type="button"
+                    class="border-gray-600 bg-blue-100 px-4 py-3 flex w-full items-center justify-between rounded-lg border hover:bg-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <span>Select Zone</span>
+                <i class="fa-solid fa-caret-down"></i>
+            </button>
+            <div id="zone-options"
+                 class="mt-2 bg-blue-100 absolute z-10 hidden w-full rounded-md shadow-lg">
+                <!-- Dynamically Inserted Options -->
+            </div>
+        </div>
+
+        <!-- Ward Dropdown -->
+        <div class="relative">
+            <button id="ward" type="button"
+                    class="border-gray-600 bg-blue-100 px-4 py-3 flex w-full items-center justify-between rounded-lg border hover:bg-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <span>Select Ward</span>
+                <i class="fa-solid fa-caret-down"></i>
+            </button>
+            <div id="ward-options"
+                 class="mt-2 max-h-60 bg-blue-100 absolute z-10 hidden w-full overflow-y-auto rounded-md shadow-lg">
+                @* @foreach (var ward in Model.Wards)
+                {
+                    <label class="gap-2 px-3 py-2 flex items-center hover:bg-blue-200">
+                        <input type="checkbox" value="@ward.Text" class="ward-checkbox h-4 w-4 text-blue-600 rounded focus:ring focus:ring-blue-400" />
+                        <span class="">Ward @ward.Text</span>
+                    </label>
+                } *@
+            </div>
+        </div>
+
+        <!-- Status Dropdown -->
+        <div class="relative">
+            <button id="status" type="button"
+                    class="border-gray-600 bg-blue-100 px-4 py-3 flex w-full items-center justify-between rounded-lg border hover:bg-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <span>Select Status</span>
+                <i class="fa-solid fa-caret-down"></i>
+            </button>
+            <div id="status-options"
+                 class="mt-2 max-h-60 bg-blue-100 absolute z-10 hidden w-full overflow-y-auto rounded-md shadow-lg">
+                <label class="gap-2 px-3 py-2 flex items-center hover:bg-blue-200">
+                    <input type="checkbox" value="1" class="status-checkbox h-4 w-4 text-blue-600 rounded focus:ring focus:ring-blue-400" />
+                    <span class="">ON</span>
+                </label>
+                <label class="gap-2 px-3 py-2 flex items-center hover:bg-blue-200">
+                    <input type="checkbox" value="2" class="status-checkbox h-4 w-4 text-blue-600 rounded focus:ring focus:ring-blue-400" />
+                    <span class="">OFF</span>
+                </label>
+                <label class="gap-2 px-3 py-2 flex items-center hover:bg-blue-200">
+                    <input type="checkbox" value="3" class="status-checkbox h-4 w-4 text-blue-600 rounded focus:ring focus:ring-blue-400" />
+                    <span class="">NC</span>
+                </label>
+            </div>
+        </div>
+    </div>
+    <div class="space-x-4 flex items-center">
+        <select class="border-gray-300 px-4 py-2 rounded border">
+            <option>GURUGRAM</option>
+        </select>
+        <select class="border-gray-300 px-4 py-2 rounded border">
+            <option>All Zone/ULB (4)</option>
+            <option>Zone 1</option>
+            <option>Zone 2</option>
+            <option>Zone 3</option>
+            <option>Zone 4</option>
+        </select>
+        <select class="border-gray-300 px-4 py-2 rounded border">
+            <option>All Ward (35)</option>
+        </select>
+        <button class="bg-blue-500 text-white px-6 py-2 rounded">Submit</button>
+        <p class="text-gray-600 ml-auto">Present On/Off Time: <span>19:00 - 05:30</span></p>
+    </div>
+
+    <!-- Dashboard Overview -->
+    <div class="gap-4 grid grid-cols-3">
+        <!-- Total Lamps Card -->
+        <div class="bg-white p-4 rounded shadow">
+            <h3 class="text-lg font-semibold">TOTAL LAMPS</h3>
+            <p class="text-2xl font-bold">20889</p>
+            <div class="mt-4 flex justify-between">
+                <div class="flex flex-col items-center">
+                    <p class="text-blue-500">0</p>
+                    <p class="text-sm">On</p>
+                </div>
+                <div class="flex flex-col items-center">
+                    <p class="text-yellow-500">0</p>
+                    <p class="text-sm">Off</p>
+                </div>
+                <div class="flex flex-col items-center">
+                    <p class="text-purple-500">20889</p>
+                    <p class="text-sm">Unknown</p>
+                </div>
+            </div>
+            <div class="mt-4 flex flex-col items-center">
+                <div class="w-24 h-24 relative">
+                    <svg class="top-0 left-0 absolute h-full w-full">
+                        <circle cx="50%" cy="50%" r="40%" stroke="#4CAF50" stroke-width="10" fill="none" />
+                    </svg>
+                    <p class="-translate-x-1/2 -translate-y-1/2 text-green-500 absolute left-1/2 top-1/2 transform text-lg font-bold">100%</p>
+                </div>
+                <p class="mt-2 text-sm">Working</p>
+            </div>
+        </div>
+
+        <!-- Energy Saved Card -->
+        <div class="bg-white p-4 rounded shadow">
+            <h3 class="text-center text-lg font-semibold">% Energy Saved Today</h3>
+            <p class="mt-4 text-center text-xl font-bold">0</p>
+            <p class="mt-2 text-center text-3xl font-bold">4,78,970</p>
+            <p class="text-gray-500 text-center text-sm">Cumulative Energy Saving (kwh)</p>
+        </div>
+
+        <!-- Total CCMS Card -->
+        <div class="bg-white p-4 rounded shadow">
+            <h3 class="text-lg font-semibold">TOTAL CCMS</h3>
+            <p class="text-2xl font-bold">798</p>
+            <div class="mt-4 flex justify-between">
+                <div class="flex flex-col items-center">
+                    <p class="text-blue-500">0</p>
+                    <p class="text-sm">On</p>
+                </div>
+                <div class="flex flex-col items-center">
+                    <p class="text-yellow-500">0</p>
+                    <p class="text-sm">Off</p>
+                </div>
+                <div class="flex flex-col items-center">
+                    <p class="text-purple-500">798</p>
+                    <p class="text-sm">Not Comm.</p>
+                </div>
+            </div>
+            <div class="mt-4 flex flex-col items-center">
+                <div class="w-24 h-24 relative">
+                    <svg class="top-0 left-0 absolute h-full w-full">
+                        <circle cx="50%" cy="50%" r="40%" stroke="#F44336" stroke-width="10" fill="none" />
+                    </svg>
+                    <p class="-translate-x-1/2 -translate-y-1/2 text-red-500 absolute left-1/2 top-1/2 transform text-lg font-bold">0%</p>
+                </div>
+                <p class="mt-2 text-sm">Working</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Map Section -->
+    <div class="bg-white p-4 rounded shadow">
+        <div id="map" class="h-96"></div>
+    </div>
+</div>
+
