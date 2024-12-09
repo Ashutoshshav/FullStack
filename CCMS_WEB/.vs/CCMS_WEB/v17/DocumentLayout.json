@@ -3,12 +3,12 @@
   "WorkspaceRootPath": "C:\\Users\\busin\\source\\repos\\CCMS_WEB\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{EAFFAD85-C17C-43CE-8E04-8E09A005DFF0}|CCMS_WEB\\CCMS_WEB.csproj|c:\\users\\busin\\source\\repos\\ccms_web\\ccms_web\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{EAFFAD85-C17C-43CE-8E04-8E09A005DFF0}|CCMS_WEB\\CCMS_WEB.csproj|solutionrelative:ccms_web\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{EAFFAD85-C17C-43CE-8E04-8E09A005DFF0}|CCMS_WEB\\CCMS_WEB.csproj|c:\\users\\busin\\source\\repos\\ccms_web\\ccms_web\\models\\login_master.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{EAFFAD85-C17C-43CE-8E04-8E09A005DFF0}|CCMS_WEB\\CCMS_WEB.csproj|solutionrelative:ccms_web\\models\\login_master.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EAFFAD85-C17C-43CE-8E04-8E09A005DFF0}|CCMS_WEB\\CCMS_WEB.csproj|c:\\users\\busin\\source\\repos\\ccms_web\\ccms_web\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{EAFFAD85-C17C-43CE-8E04-8E09A005DFF0}|CCMS_WEB\\CCMS_WEB.csproj|solutionrelative:ccms_web\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{EAFFAD85-C17C-43CE-8E04-8E09A005DFF0}|CCMS_WEB\\CCMS_WEB.csproj|c:\\users\\busin\\source\\repos\\ccms_web\\ccms_web\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
@@ -46,7 +46,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "Login_Master.cs",
               "DocumentMoniker": "C:\\Users\\busin\\source\\repos\\CCMS_WEB\\CCMS_WEB\\Models\\Login_Master.cs",
               "RelativeDocumentMoniker": "CCMS_WEB\\Models\\Login_Master.cs",
@@ -113,7 +113,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "Index.cshtml",
               "DocumentMoniker": "C:\\Users\\busin\\source\\repos\\CCMS_WEB\\CCMS_WEB\\Views\\Home\\Index.cshtml",
               "RelativeDocumentMoniker": "CCMS_WEB\\Views\\Home\\Index.cshtml",
