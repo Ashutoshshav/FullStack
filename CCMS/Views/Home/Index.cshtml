@@ -95,9 +95,30 @@
 @section Scripts
 {
     <script>
-        setInterval(function () {
-            location.reload(); // This reloads the current page
-        }, 30000); // 30 seconds
+        function reloadPage() {
+            console.log('Page reloading...');
+            location.reload();
+        }
+
+        // Function to call API for database check
+        function checkDatabaseChanges() {
+            console.log('Checking database changes...');
+            // Example API call
+            fetch('/api/Update999')
+                .then(response => response.json())
+                .then(data => {
+                    console.log('database change detected:', data);
+                })
+                .catch(error => {
+                    console.error('error checking database:', error);
+                });
+        }
+
+        // Schedule page reload every 30 seconds
+        setTimeout(() => reloadPage(), 30000);
+
+        // Schedule database check every 3 minutes
+        setInterval(() => checkDatabaseChanges(), 40000);
 
         function getCookieValue(cookieName) {
             const cookies = document.cookie.split("; ");

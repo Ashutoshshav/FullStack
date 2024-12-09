@@ -1,0 +1,160 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="flex flex-col space-y-4 p-4">
+    <!-- Filters Section -->
+    <div class="flex w-full items-center justify-between space-x-4">
+        <select class="w-1/4 rounded border border-gray-300 px-4 py-2">
+            <option>GURUGRAM</option>
+        </select>
+        <!-- Zone Dropdown -->
+        <div class="relative w-1/4 rounded border border-gray-300 bg-white px-4 py-2">
+            <button id="zone" type="button"
+                    class="flex w-full items-center justify-between">
+                <span>Select Zone</span>
+                <i class="fa-solid fa-caret-down"></i>
+            </button>
+            <div id="zone-options"
+                 class="z-10 absolute mt-2 hidden w-full rounded-md bg-blue-100 shadow-lg">
+                <!-- Dynamically Inserted Options -->
+            </div>
+        </div>
+
+        <!-- Ward Dropdown -->
+        <div class="relative w-1/4 rounded border border-gray-300 bg-white px-4 py-2">
+            <button id="ward" type="button"
+                    class="flex w-full items-center justify-between">
+                <span>Select Ward</span>
+                <i class="fa-solid fa-caret-down"></i>
+            </button>
+            <div id="ward-options"
+                 class="z-10 absolute mt-2 hidden max-h-60 w-full overflow-y-auto rounded-md bg-blue-100 shadow-lg">
+                @* @foreach (var ward in Model.Wards)
+                {
+                    <label class="flex items-center gap-2 px-3 py-2 hover:bg-blue-200">
+                        <input type="checkbox" value="@ward.Text" class="ward-checkbox h-4 w-4 rounded text-blue-600 focus:ring focus:ring-blue-400" />
+                        <span class="">Ward @ward.Text</span>
+                    </label>
+                } *@
+            </div>
+        </div>
+
+        <div class="flex w-1/4 items-center justify-between">
+            <button class="rounded bg-blue-500 px-4 py-2 text-white">Submit</button>
+            <p class="text-gray-600">Present On/Off Time: <span>19:00 - 05:30</span></p>
+        </div>
+    </div>
+
+    <!-- Dashboard Overview -->
+    <div class="grid-cols-3 grid gap-4">
+        <!-- Total Lamps Card -->
+        <div class="rounded bg-white p-4 shadow">
+            <h3 class="text-lg font-semibold">TOTAL LAMPS</h3>
+            <p class="text-2xl font-bold">20889</p>
+            <div class="mt-4 flex justify-between">
+                <div class="flex flex-col items-center">
+                    <p class="text-blue-500">0</p>
+                    <p class="text-sm">On</p>
+                </div>
+                <div class="flex flex-col items-center">
+                    <p class="text-yellow-500">0</p>
+                    <p class="text-sm">Off</p>
+                </div>
+                <div class="flex flex-col items-center">
+                    <p class="text-purple-500">20889</p>
+                    <p class="text-sm">Unknown</p>
+                </div>
+            </div>
+            <div class="mt-4 flex flex-col items-center">
+                <div class="relative h-24 w-24">
+                    <svg class="absolute left-0 top-0 h-full w-full">
+                        <circle cx="50%" cy="50%" r="40%" stroke="#4CAF50" stroke-width="10" fill="none" />
+                    </svg>
+                    <p class="-translate-x-1/2 -translate-y-1/2 absolute left-1/2 top-1/2 transform text-lg font-bold text-green-500">100%</p>
+                </div>
+                <p class="mt-2 text-sm">Working</p>
+            </div>
+        </div>
+
+        <!-- Energy Saved Card -->
+        <div class="rounded bg-white p-4 shadow">
+            <h3 class="text-center text-lg font-semibold">% Energy Saved Today</h3>
+            <p class="mt-4 text-center text-xl font-bold">0</p>
+            <p class="mt-2 text-center text-3xl font-bold">4,78,970</p>
+            <p class="text-center text-sm text-gray-500">Cumulative Energy Saving (kwh)</p>
+        </div>
+
+        <!-- Total CCMS Card -->
+        <div class="rounded bg-white p-4 shadow">
+            <h3 class="text-lg font-semibold">TOTAL CCMS</h3>
+            <p class="text-2xl font-bold">798</p>
+            <div class="mt-4 flex justify-between">
+                <div class="flex flex-col items-center">
+                    <p class="text-blue-500">0</p>
+                    <p class="text-sm">On</p>
+                </div>
+                <div class="flex flex-col items-center">
+                    <p class="text-yellow-500">0</p>
+                    <p class="text-sm">Off</p>
+                </div>
+                <div class="flex flex-col items-center">
+                    <p class="text-purple-500">798</p>
+                    <p class="text-sm">Not Comm.</p>
+                </div>
+            </div>
+            <div class="mt-4 flex flex-col items-center">
+                <div class="relative h-24 w-24">
+                    <svg class="absolute left-0 top-0 h-full w-full">
+                        <circle cx="50%" cy="50%" r="40%" stroke="#F44336" stroke-width="10" fill="none" />
+                    </svg>
+                    <p class="-translate-x-1/2 -translate-y-1/2 absolute left-1/2 top-1/2 transform text-lg font-bold text-red-500">0%</p>
+                </div>
+                <p class="mt-2 text-sm">Working</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Map Section -->
+    <div class="rounded bg-white p-4 shadow">
+        <div id="map" class="h-96"></div>
+    </div>
+</div>
+
+<script>
+    var zones = [
+        { ZoneID: 1, ZoneName: "Zone 1" },
+        { ZoneID: 2, ZoneName: "Zone 2" },
+        { ZoneID: 3, ZoneName: "Zone 3" },
+        { ZoneID: 4, ZoneName: "Zone 4" },
+    ];
+
+    // Toggle zone dropdown visibility when clicked
+    $('#zone').click(function () {
+        $('#zone-options').toggle(); // Toggle visibility of zone options
+    });
+
+    // Toggle ward dropdown visibility when clicked
+    $('#ward').click(function () {
+        $('#ward-options').toggle(); // Toggle visibility of ward options
+    });
+
+    // Toggle ward dropdown visibility when clicked
+    $('#status').click(function () {
+        $('#status-options').toggle(); // Toggle visibility of ward options
+    });
+
+    $(document).ready(function () { 
+        // Populate Zones
+        $('#zone-options').empty(); // Clear any existing content
+        $.each(zones, function (index, zone) {
+            // console.log(zone.ZoneID)
+            $('#zone-options').append(
+                `<label class="flex items-center gap-2 px-3 py-2 hover:bg-blue-200" >
+                     <input type="checkbox" class="zone-checkbox h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring focus:ring-blue-400" value="${zone.ZoneID}" />
+                     <span class=""> ${zone.ZoneName}</span>
+                 </label>`
+            );
+        });
+    })
+</script>

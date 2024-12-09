@@ -13,5 +13,6 @@ namespace CCMS.Models
         public string? Ward { get; set; }
         public string? Status { get; set; }
         public string? NoOfStreetlight { get; set; }
+        public DateTime ResponseDTime { get; set; }
     }
 }

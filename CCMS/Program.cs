@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using CCMS.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -73,6 +74,104 @@ builder.Services.AddAuthentication(options =>
 });
 
 var app = builder.Build();
+
+// Timer to call the function every 3 minutes
+var timer = new Timer(async state =>
+{
+    try
+    {
+        using var scope = app.Services.CreateScope();
+        var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+
+        // Call your function here
+        await Update999(context);
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine($"Error: {ex.Message}");
+    }
+}, null, TimeSpan.Zero, TimeSpan.FromMinutes(3));
+
+// Timer to call the second function every 30 seconds
+var timer30Sec = new Timer(async state =>
+{
+    try
+    {
+        using var scope = app.Services.CreateScope();
+        var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+
+        // Call your 30-second function
+        await UpdateIMEIStatus(context);
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine($"Error in 30-second timer: {ex.Message}");
+    }
+}, null, TimeSpan.Zero, TimeSpan.FromSeconds(30));
+
+// Function to update data
+static async Task Update999(ApplicationDbContext context)
+{
+    var imeiRecordsToUpdate = await context.IMEI_Master
+            .Where(im => im.Status == "2")
+            .ToListAsync();
+
+    if (!imeiRecordsToUpdate.Any())
+    {
+        Console.WriteLine("No records found with Response = 9993.");
+        return;
+    }
+
+    // Update the Response field to 9999
+    foreach (var record in imeiRecordsToUpdate)
+    {
+        record.Response = "9999";
+    }
+
+    context.SaveChangesAsync();
+
+    Console.WriteLine("Statuses updated successfully. 3-Min function executed.");
+}
+
+// Function to update data every 30 seconds
+static async Task UpdateIMEIStatus(ApplicationDbContext context)
+{
+    // Fetch necessary data upfront
+    var networkData = await context.Network.ToListAsync();
+    var networkStsData = await context.NetworkSts.FirstOrDefaultAsync(); // Assuming only one row is relevant
+    var imeiData = await context.IMEI_Master.ToDictionaryAsync(im => im.IMEI_no); // Preload all IMEI records
+
+    if (networkStsData == null)
+    {
+        Console.WriteLine("NetworkSts data not found.");
+        return;
+    }
+
+    var deviceOfflineThreshold = networkStsData.DeviceOffline;
+
+    // Create a list to hold updated IMEI records
+    var updatedIMEIs = new List<IMEI_Master>();
+
+    foreach (var device in networkData)
+    {
+        if (imeiData.TryGetValue(device.IMEI_no, out var imeiRecord))
+        {
+            // Update status based on condition
+            imeiRecord.Status = device.DUR > deviceOfflineThreshold ? "2" : "1";
+            updatedIMEIs.Add(imeiRecord);
+        }
+        else
+        {
+            Console.WriteLine($"IMEI record not found for IMEI_no: {device.IMEI_no}");
+        }
+    }
+
+    // Bulk update IMEI records
+    context.IMEI_Master.UpdateRange(updatedIMEIs);
+    await context.SaveChangesAsync();
+
+    Console.WriteLine("30-second function executed.");
+}
 
 // Configure the HTTP request pipeline.</div></div>
 if (!app.Environment.IsDevelopment())

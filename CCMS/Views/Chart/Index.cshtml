@@ -6,7 +6,7 @@
 }
 
 <div class="mt-8 flex min-h-screen w-full flex-col justify-center gap-4 bg-gray-100 p-3 sm:p-4 sm:m-0">
-    <h1 class="mt-8 text-center text-3xl font-semibold text-gray-900">Overall Device Status</h1>
+    <h1 class="mt-8 text-center text-3xl font-semibold text-gray-900 lg:mt-14">Overall Device Status</h1>
     <div class="grid-cols-1 grid w-full max-w-full gap-8 sm:grid-cols-2">
         <div class="w-full rounded-lg border border-gray-300 px-1 py-4 text-gray-900 shadow-lg sm:px-3">
             <div class="flex justify-between px-2 text-lg font-semibold sm:text-xl">
@@ -166,15 +166,15 @@
 
                     // Calculate the center coordinates for percentage text
                     const percentageText = `${total}`;
-                    const percentageTextX = Math.round((width - ctx.measureText(percentageText).width) / 2);
-                    const percentageTextY = height / 2 - 10; // Slightly above center for better spacing
+                    const percentageTextX = Math.round((width - ctx.measureText(percentageText).width) / 1.9);
+                    const percentageTextY = height / 1.9 - 10; // Slightly above center for better spacing
                     ctx.fillText(percentageText, percentageTextX, percentageTextY);
 
                     // Font and styling for "Working" text
                     const fontSizeLabel = (height / 300).toFixed(2); // Slightly smaller font size for label
                     ctx.font = `${fontSizeLabel}em sans-serif`;
                     const labelText = 'Streetlights';
-                    const labelTextX = Math.round((width - ctx.measureText(labelText).width) / 2);
+                    const labelTextX = Math.round((width - ctx.measureText(labelText).width) / 1.9);
                     const labelTextY = height / 1.9 + 15; // Slightly below center for better spacing
                     ctx.fillText(labelText, labelTextX, labelTextY);
 
@@ -187,64 +187,64 @@
     centerTextPlugin(TotalNoOfStreetlight)
     centerTextPlugin(TotalCCMS)
 
-    Chart.register({
-        id: 'curvedLabelsPlugin',
-        afterDraw(chart) {
-            const { ctx, data, chartArea } = chart;
-            const centerX = (chartArea.left + chartArea.right) / 2; // Center X of the chart
-            const centerY = (chartArea.top + chartArea.bottom) / 2; // Center Y of the chart
-            const meta = chart.getDatasetMeta(0); // Get metadata of the first dataset
-            const radius = meta.data[0].outerRadius; // Outer radius of the chart
-            const labelDistance = 30; // Distance between the circle and the labels
+    // Chart.register({
+    //     id: 'curvedLabelsPlugin',
+    //     afterDraw(chart) {
+    //         const { ctx, data, chartArea } = chart;
+    //         const centerX = (chartArea.left + chartArea.right) / 2; // Center X of the chart
+    //         const centerY = (chartArea.top + chartArea.bottom) / 2; // Center Y of the chart
+    //         const meta = chart.getDatasetMeta(0); // Get metadata of the first dataset
+    //         const radius = meta.data[0].outerRadius; // Outer radius of the chart
+    //         const labelDistance = 30; // Distance between the circle and the labels
 
-            // Calculate total sum of data values
-            const total = data.datasets[0].data.reduce((sum, value) => sum + value, 0);
+    //         // Calculate total sum of data values
+    //         const total = data.datasets[0].data.reduce((sum, value) => sum + value, 0);
 
-            ctx.save(); // Save the canvas state
+    //         ctx.save(); // Save the canvas state
 
-            data.datasets[0].data.forEach((value, index) => {
-                const arc = meta.data[index]; // Get the arc corresponding to this label
-                const startAngle = arc.startAngle; // Start angle of the arc
-                const endAngle = arc.endAngle; // End angle of the arc
-                const angle = (startAngle + endAngle) / 2; // Midpoint angle of the arc
+    //         data.datasets[0].data.forEach((value, index) => {
+    //             const arc = meta.data[index]; // Get the arc corresponding to this label
+    //             const startAngle = arc.startAngle; // Start angle of the arc
+    //             const endAngle = arc.endAngle; // End angle of the arc
+    //             const angle = (startAngle + endAngle) / 2; // Midpoint angle of the arc
 
-                // Position for the value (middle)
-                const x = centerX + Math.cos(angle) * (radius + labelDistance); // X position
-                const valueY = centerY + Math.sin(angle) * (radius + labelDistance); // Y position for value
+    //             // Position for the value (middle)
+    //             const x = centerX + Math.cos(angle) * (radius + labelDistance); // X position
+    //             const valueY = centerY + Math.sin(angle) * (radius + labelDistance); // Y position for value
 
-                // Position for the label name (on top)
-                const labelY = valueY - 20; // 20px above the value
+    //             // Position for the label name (on top)
+    //             const labelY = valueY - 20; // 20px above the value
 
-                // Position for the percentage (below the value)
-                const percentageY = valueY + 20; // 20px below the value
+    //             // Position for the percentage (below the value)
+    //             const percentageY = valueY + 20; // 20px below the value
 
-                // Calculate percentage
-                const percentage = ((value / total) * 100).toFixed(1); // Calculate percentage and round to 1 decimal
+    //             // Calculate percentage
+    //             const percentage = ((value / total) * 100).toFixed(1); // Calculate percentage and round to 1 decimal
 
-                // Draw the label name (on top)
-                const labelName = data.labels[index] || 'Label'; // Get label from data.labels or default to "Label"
-                ctx.font = '12px Arial'; // Font size for the label name
-                ctx.fillStyle = '#000'; // Black color for label name
-                ctx.textAlign = 'center';
-                ctx.textBaseline = 'middle';
-                ctx.fillText(labelName, x, labelY); // Draw the label name
+    //             // Draw the label name (on top)
+    //             const labelName = data.labels[index] || 'Label'; // Get label from data.labels or default to "Label"
+    //             ctx.font = '12px Arial'; // Font size for the label name
+    //             ctx.fillStyle = '#000'; // Black color for label name
+    //             ctx.textAlign = 'center';
+    //             ctx.textBaseline = 'middle';
+    //             ctx.fillText(labelName, x, labelY); // Draw the label name
 
-                // Draw the value (middle)
-                ctx.font = '18px Arial'; // Larger font for the value
-                ctx.fillStyle = data.datasets[0].backgroundColor[index]; // Use the segment's color
-                ctx.textAlign = 'center';
-                ctx.textBaseline = 'middle';
-                ctx.fillText(value, x, valueY); // Draw the value
+    //             // Draw the value (middle)
+    //             ctx.font = '18px Arial'; // Larger font for the value
+    //             ctx.fillStyle = data.datasets[0].backgroundColor[index]; // Use the segment's color
+    //             ctx.textAlign = 'center';
+    //             ctx.textBaseline = 'middle';
+    //             ctx.fillText(value, x, valueY); // Draw the value
 
-                // Draw the percentage (below the value)
-                ctx.font = '14px Arial'; // Smaller font for percentage
-                ctx.fillStyle = '#666'; // Gray color for percentage
-                ctx.fillText(`${percentage}%`, x, percentageY); // Draw the percentage
-            });
+    //             // Draw the percentage (below the value)
+    //             ctx.font = '14px Arial'; // Smaller font for percentage
+    //             ctx.fillStyle = '#666'; // Gray color for percentage
+    //             ctx.fillText(`${percentage}%`, x, percentageY); // Draw the percentage
+    //         });
 
-            ctx.restore(); // Restore the canvas state
-        },
-    });
+    //         ctx.restore(); // Restore the canvas state
+    //     },
+    // });
 
     // Safeguard for null data
     var firstChartData = {
@@ -286,7 +286,12 @@
             responsive: false,
             maintainAspectRatio: false,
             layout: {
-                padding: 25,
+                padding: {
+                    left: 30,
+                    right: 15,
+                    top: 0,
+                    buttom: 0,
+                }
             },
             plugins: {
                 legend: {
@@ -310,7 +315,12 @@
             responsive: false,
             maintainAspectRatio: false,
             layout: {
-                padding: 25, // Add padding for labels
+                padding: {
+                    left: 30,
+                    right: 15,
+                    top: 0,
+                    buttom: 0,
+                }
             },
             plugins: {
                 legend: {
@@ -344,7 +354,7 @@
         chart.data.labels.forEach((label, index) => {
             const li = document.createElement('li');
             li.innerHTML = `
-                                        <div class="my-2 flex flex-col justify-around sm:my-4">
+                   <div class="flex flex-col justify-around sm:mx-7">
                         <div class="flex items-center">
                             <!-- Legend Indicator -->
                             <span
@@ -371,5 +381,5 @@
     // Render Custom Legends for both charts
     renderLegend(myDoughnutChart1, 'firstChartLegend');
     renderLegend(myDoughnutChart2, 'secondChartLegend');
-    updateStatusNetwork()
+    // updateStatusNetwork()
 </script>

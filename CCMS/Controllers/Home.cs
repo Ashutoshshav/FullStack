@@ -94,8 +94,6 @@ namespace CCMS.Controllers
             Console.WriteLine($"IMEI: {IMEI}");
             Console.WriteLine($"IMEI: {deviceData}");
 
-            //var result = Tuple.Create(Data, deviceData);
-
             return View(alldata);
         }
 
@@ -156,15 +154,6 @@ namespace CCMS.Controllers
 
                 Console.WriteLine(devices);
                 return Json(devices);
-                //// Query the Devices table
-                //var devices = await context.IMEI_Master
-                //    .Where(d => (zones == null || zones.Contains(d.Zone)) &&
-                //                (wards == null || wards.Contains(d.Ward)))
-                //    .Select(d => new { d.IMEI_no, d.Location, d.Status, d.Zone, d.Ward })
-                //    .ToListAsync();
-
-                //Console.WriteLine(devices);
-                //return Json(devices);
             }
             catch (Exception ex) 
             {
@@ -188,7 +177,6 @@ namespace CCMS.Controllers
             {
                 // Parse input
                 var imeiNo = requestData.TryGetProperty("IMEI_no", out var IMEI_noElement) ? IMEI_noElement.GetString() : null;
-                var newStatus = requestData.TryGetProperty("Status", out var StatusElement) ? StatusElement.GetString() : null;
                 var response = requestData.TryGetProperty("ResponseSts", out var ResponseStsElement) ? ResponseStsElement.GetString() : null;
 
                 if (imeiNo == null || response == null)
@@ -199,7 +187,13 @@ namespace CCMS.Controllers
 
                 if (imeiRecord != null)
                 {
+                    // Convert UTC to IST
+                    DateTime utcNow = DateTime.UtcNow;
+                    TimeZoneInfo istTimeZone = TimeZoneInfo.FindSystemTimeZoneById("India Standard Time");
+                    DateTime istDateTime = TimeZoneInfo.ConvertTimeFromUtc(utcNow, istTimeZone);
+
                     imeiRecord.Response = response;
+                    imeiRecord.ResponseDTime = istDateTime;
                     await context.SaveChangesAsync();
 
                     // Return minimal response
@@ -220,56 +214,6 @@ namespace CCMS.Controllers
                 return Json(new { success = false, message = ex.Message });
             }
         }
-
-        //public async Task<IActionResult> UpdateIMEIStatus([FromBody] JsonElement requestData)
-        //{
-        //    try
-        //    {
-        //        var imeiNo = requestData.TryGetProperty("IMEI_no", out var IMEI_noElement)
-        //            ? IMEI_noElement.GetString()
-        //            : null;
-
-        //        var newStatus = requestData.TryGetProperty("Status", out var StatusElement)
-        //            ? StatusElement.GetString()
-        //            : null;
-
-        //        var Response = requestData.TryGetProperty("ResponseSts", out var ResponseStsElement)
-        //            ? ResponseStsElement.GetString()
-        //            : null;
-
-        //        Console.WriteLine($"IMEI No: {imeiNo}");
-        //        Console.WriteLine($"New Status: {newStatus}");
-        //        Console.WriteLine($"Response: {Response}");
-
-        //        // Find the record by IMEI_No
-        //        var imeiRecord = await context.IMEI_Master.FirstOrDefaultAsync(i => i.IMEI_no == imeiNo);
-        //        Console.WriteLine($"IMEI No: { imeiRecord}");
-        //        if (imeiRecord != null)
-        //        {
-        //            //imeiRecord.Status = newStatus;
-        //            imeiRecord.Response = Response; // Update the status
-        //            await context.SaveChangesAsync(); // Save changes to the database
-
-        //            // Return success response with the updated record
-        //            return Json(new
-        //            {
-        //                success = true,
-        //                message = "Status updated successfully.",
-        //                data = imeiRecord // Send the updated record
-        //            });
-        //        }
-        //        else
-        //        {
-        //            // Return error response if the IMEI is not found
-        //            return Json(new { success = false, message = "IMEI not found." });
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        // Handle exceptions and return an error response
-        //        return Json(new { success = false, message = ex.Message });
-        //    }
-        //}
 
         [HttpGet]
         public IActionResult Search(string query)
@@ -329,57 +273,26 @@ namespace CCMS.Controllers
             return Ok("Statuses updated successfully.");
         }
 
-        //[HttpGet]
-        //public async Task<IActionResult> updateStatus()
-        //{
-        //    // Fetch data from the NetworkSts table using the context
-        //    var data1 = await context.NetworkSts.ToListAsync(); // Ensure NetworkSts is part of your DbContext
+        [HttpGet]
+        [Route("api/checkP10ByIMEI")]
+        public async Task<IActionResult> CheckP7ByIMEI(string imei)
+        {
+            if (string.IsNullOrEmpty(imei))
+            {
+                return BadRequest("IMEI number is required.");
+            }
 
-        //    // Fetch data from the Network table using the context
-        //    var data = await context.Network.ToListAsync(); // Ensure Network is part of your DbContext
+            var value = await context.VisLive
+                .Where(x => x.IMEI_no == imei)
+                .Select(x => x.P10)
+                .FirstOrDefaultAsync();
 
-        //    Console.WriteLine($"NetworkSts Data: {data1}");
-        //    Console.WriteLine($"Network Data: {data}");
+            if (value == null)
+            {
+                return NotFound($"No record found for IMEI: {imei}");
+            }
 
-        //    foreach (var device in data)
-        //    {
-        //        // Example of a change: set DeviceOffline to 0 if DeviceNA is greater than 1000
-        //        if (device.DUR > data1[0].DeviceOffline)
-        //        {
-        //            // Find the record where IMEI_No is equal to imeiNo
-        //            var imeiRecord = await context.IMEI_Master
-        //                                          .FirstOrDefaultAsync(im => im.IMEI_no == device.IMEI_no);
-
-        //            if (imeiRecord == null)
-        //            {
-        //                // If no record is found, return a NotFound result
-        //                return NotFound("IMEI record not found.");
-        //            }
-
-        //            // Update the status
-        //            imeiRecord.Status = "2";
-
-        //            // Save changes to the database
-        //            await context.SaveChangesAsync();
-        //        } else
-        //        {
-        //            var imeiRecord = await context.IMEI_Master
-        //                                          .FirstOrDefaultAsync(im => im.IMEI_no == device.IMEI_no);
-
-        //            imeiRecord.Status = "1";
-
-        //            await context.SaveChangesAsync();
-        //        }
-        //    }
-
-        // Return the data as a JSON response
-        //var responseData = new
-        //    {
-        //        NetworkSts = data1,
-        //        Network = data
-        //    };
-
-        //    return Json(responseData);
-        //}
+            return Ok(new { value });
+        }
     }
 }

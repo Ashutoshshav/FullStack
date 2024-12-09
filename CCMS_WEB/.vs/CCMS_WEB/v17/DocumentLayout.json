@@ -1,0 +1,144 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\busin\\source\\repos\\CCMS_WEB\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{EAFFAD85-C17C-43CE-8E04-8E09A005DFF0}|CCMS_WEB\\CCMS_WEB.csproj|c:\\users\\busin\\source\\repos\\ccms_web\\ccms_web\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{EAFFAD85-C17C-43CE-8E04-8E09A005DFF0}|CCMS_WEB\\CCMS_WEB.csproj|solutionrelative:ccms_web\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EAFFAD85-C17C-43CE-8E04-8E09A005DFF0}|CCMS_WEB\\CCMS_WEB.csproj|c:\\users\\busin\\source\\repos\\ccms_web\\ccms_web\\models\\login_master.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EAFFAD85-C17C-43CE-8E04-8E09A005DFF0}|CCMS_WEB\\CCMS_WEB.csproj|solutionrelative:ccms_web\\models\\login_master.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EAFFAD85-C17C-43CE-8E04-8E09A005DFF0}|CCMS_WEB\\CCMS_WEB.csproj|c:\\users\\busin\\source\\repos\\ccms_web\\ccms_web\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{EAFFAD85-C17C-43CE-8E04-8E09A005DFF0}|CCMS_WEB\\CCMS_WEB.csproj|solutionrelative:ccms_web\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EAFFAD85-C17C-43CE-8E04-8E09A005DFF0}|CCMS_WEB\\CCMS_WEB.csproj|c:\\users\\busin\\source\\repos\\ccms_web\\ccms_web\\custommodel\\datamodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EAFFAD85-C17C-43CE-8E04-8E09A005DFF0}|CCMS_WEB\\CCMS_WEB.csproj|solutionrelative:ccms_web\\custommodel\\datamodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EAFFAD85-C17C-43CE-8E04-8E09A005DFF0}|CCMS_WEB\\CCMS_WEB.csproj|c:\\users\\busin\\source\\repos\\ccms_web\\ccms_web\\controllers\\home.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EAFFAD85-C17C-43CE-8E04-8E09A005DFF0}|CCMS_WEB\\CCMS_WEB.csproj|solutionrelative:ccms_web\\controllers\\home.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EAFFAD85-C17C-43CE-8E04-8E09A005DFF0}|CCMS_WEB\\CCMS_WEB.csproj|c:\\users\\busin\\source\\repos\\ccms_web\\ccms_web\\models\\imei_master.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EAFFAD85-C17C-43CE-8E04-8E09A005DFF0}|CCMS_WEB\\CCMS_WEB.csproj|solutionrelative:ccms_web\\models\\imei_master.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EAFFAD85-C17C-43CE-8E04-8E09A005DFF0}|CCMS_WEB\\CCMS_WEB.csproj|c:\\users\\busin\\source\\repos\\ccms_web\\ccms_web\\ccms_web.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{EAFFAD85-C17C-43CE-8E04-8E09A005DFF0}|CCMS_WEB\\CCMS_WEB.csproj|solutionrelative:ccms_web\\ccms_web.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 141,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Login_Master.cs",
+              "DocumentMoniker": "C:\\Users\\busin\\source\\repos\\CCMS_WEB\\CCMS_WEB\\Models\\Login_Master.cs",
+              "RelativeDocumentMoniker": "CCMS_WEB\\Models\\Login_Master.cs",
+              "ToolTip": "C:\\Users\\busin\\source\\repos\\CCMS_WEB\\CCMS_WEB\\Models\\Login_Master.cs",
+              "RelativeToolTip": "CCMS_WEB\\Models\\Login_Master.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-04T10:00:34.256Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "CCMS_WEB.csproj",
+              "DocumentMoniker": "C:\\Users\\busin\\source\\repos\\CCMS_WEB\\CCMS_WEB\\CCMS_WEB.csproj",
+              "RelativeDocumentMoniker": "CCMS_WEB\\CCMS_WEB.csproj",
+              "ToolTip": "C:\\Users\\busin\\source\\repos\\CCMS_WEB\\CCMS_WEB\\CCMS_WEB.csproj",
+              "RelativeToolTip": "CCMS_WEB\\CCMS_WEB.csproj",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABIAAABaAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2024-12-04T10:06:14.949Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Home.cs",
+              "DocumentMoniker": "C:\\Users\\busin\\source\\repos\\CCMS_WEB\\CCMS_WEB\\Controllers\\Home.cs",
+              "RelativeDocumentMoniker": "CCMS_WEB\\Controllers\\Home.cs",
+              "ToolTip": "C:\\Users\\busin\\source\\repos\\CCMS_WEB\\CCMS_WEB\\Controllers\\Home.cs",
+              "RelativeToolTip": "CCMS_WEB\\Controllers\\Home.cs",
+              "ViewState": "AQIAAAsAAAAAAAAAAADwvxUAAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-05T10:30:19.299Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "IMEI_Master.cs",
+              "DocumentMoniker": "C:\\Users\\busin\\source\\repos\\CCMS_WEB\\CCMS_WEB\\Models\\IMEI_Master.cs",
+              "RelativeDocumentMoniker": "CCMS_WEB\\Models\\IMEI_Master.cs",
+              "ToolTip": "C:\\Users\\busin\\source\\repos\\CCMS_WEB\\CCMS_WEB\\Models\\IMEI_Master.cs",
+              "RelativeToolTip": "CCMS_WEB\\Models\\IMEI_Master.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAqwAgAAAAsAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-04T09:58:54.833Z"
+            }
+          ]
+        },
+        {
+          "DockedWidth": 445,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "C:\\Users\\busin\\source\\repos\\CCMS_WEB\\CCMS_WEB\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "CCMS_WEB\\Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "C:\\Users\\busin\\source\\repos\\CCMS_WEB\\CCMS_WEB\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "CCMS_WEB\\Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AQIAABIAAAAAAAAAAAAAABUAAAArAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-12-07T05:47:04.385Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\busin\\source\\repos\\CCMS_WEB\\CCMS_WEB\\Views\\Home\\Index.cshtml",
+              "RelativeDocumentMoniker": "CCMS_WEB\\Views\\Home\\Index.cshtml",
+              "ToolTip": "C:\\Users\\busin\\source\\repos\\CCMS_WEB\\CCMS_WEB\\Views\\Home\\Index.cshtml",
+              "RelativeToolTip": "CCMS_WEB\\Views\\Home\\Index.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAAlAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-12-05T10:54:56.153Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "DataModel.cs",
+              "DocumentMoniker": "C:\\Users\\busin\\source\\repos\\CCMS_WEB\\CCMS_WEB\\CustomModel\\DataModel.cs",
+              "RelativeDocumentMoniker": "CCMS_WEB\\CustomModel\\DataModel.cs",
+              "ToolTip": "C:\\Users\\busin\\source\\repos\\CCMS_WEB\\CCMS_WEB\\CustomModel\\DataModel.cs",
+              "RelativeToolTip": "CCMS_WEB\\CustomModel\\DataModel.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAMAAAAFAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-06T05:27:18.208Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
